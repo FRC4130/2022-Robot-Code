@@ -1,9 +1,7 @@
 package frc.robot.Robots;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.PS4Controller;
+import com.revrobotics.CANSparkMax;
 
 public class RobotMap {
     //DT Motors
@@ -12,7 +10,8 @@ public class RobotMap {
     public static TalonFX rightDrive;
     public static TalonFX rightDrive2;
 
-   // public static CANSpark
+    public static CANSparkMax index1;
+    public static CANSparkMax index2;
 
     public static void Init() {
 
