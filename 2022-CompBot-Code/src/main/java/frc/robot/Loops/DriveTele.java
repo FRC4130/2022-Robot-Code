@@ -4,19 +4,24 @@ import com.ctre.phoenix.ILoopable;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.PS4Controller;
+import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.DriveTrain;
 
-public class DriveTele implements ILoopable {
+public class DriveTele implements ILoopable{
 
     DriveTrain _drive;
-    PS4Controller robotController;
+    PS4Controller _controller;
+
+    public DriveTele(){
+        _drive = Subsystems.driveTrain;
+    }
 
     public void onStart(){
         _drive.setNeutralMode(NeutralMode.Brake);
     }
 
     public void onLoop(){
-        _drive.RobotMovement(robotController.getLeftY(), robotController.getRightY());
+        _drive.RobotMovement(_controller.getLeftY(), _controller.getRightY());
     }
 
     public boolean isDone(){
