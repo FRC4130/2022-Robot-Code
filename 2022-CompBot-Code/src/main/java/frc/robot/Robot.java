@@ -7,15 +7,18 @@ import frc.robot.Robots.Loops;
 import frc.robot.Robots.RobotMap;
 import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.DriveTrain;
+import frc.robot.Subsystems.Index;
 
 
 public class Robot extends TimedRobot {
 
   ConcurrentScheduler teleop;
   DriveTrain _drive;
+  Index _index;
 
   public Robot(){
       _drive = Subsystems.driveTrain;
+      _index = Subsystems.index;
   }
   
   @Override
@@ -23,6 +26,7 @@ public class Robot extends TimedRobot {
     RobotMap.Init();
     Subsystems.Init();
     _drive = Subsystems.driveTrain;
+    _index = Subsystems.index;
   }
 
   @Override
