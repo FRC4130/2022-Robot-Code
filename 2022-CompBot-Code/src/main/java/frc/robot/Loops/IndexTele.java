@@ -5,13 +5,16 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.PS4Controller;
 import frc.robot.Robots.RobotMap;
+import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.Index;
+import frc.robot.Subsystems.IntakePosition;
 
 public class IndexTele implements ILoopable {
     CANSparkMax index1;
     CANSparkMax index2;
     CANSparkMax intake;
     PS4Controller controller;
+    IntakePosition _IntakePosition;
 
 
     Index _index;
@@ -21,6 +24,7 @@ public class IndexTele implements ILoopable {
         index2 = RobotMap.index2;
         intake = RobotMap.intake;
         controller = RobotMap.controller;
+        _IntakePosition = Subsystems.intakePosition;
     }
 
     public void onStart(){
@@ -33,6 +37,25 @@ public class IndexTele implements ILoopable {
         }
         else {
             _index.stopIndex();
+        }
+
+        if(controller.getL1Button()){
+            _index.runIndex();
+
+            _IntakePosition.set(_IntakePosition.Sucking);
+        }
+        else {
+            if (!controller.getCrossButton()){
+                _index.stopIndex();
+            }
+            _index.stopIndex();
+            _IntakePosition.set(_IntakePosition.Stored);
+        }
+    }
+
+    public void updateIntakeSolenoid(){
+        //if(indexMove) {
+            _IntakePosition.set(_IntakePosition.Sucking);
         }
     }
 
