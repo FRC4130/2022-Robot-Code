@@ -4,6 +4,7 @@ import com.ctre.phoenix.ILoopable;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.PS4Controller;
+import frc.robot.Robots.RobotMap;
 import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.DriveTrain;
 
@@ -14,6 +15,7 @@ public class DriveTele implements ILoopable{
 
     public DriveTele(){
         _drive = Subsystems.driveTrain;
+        _controller = RobotMap.controller;
     }
 
     public void onStart(){

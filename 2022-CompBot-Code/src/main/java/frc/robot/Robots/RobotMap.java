@@ -2,6 +2,7 @@ package frc.robot.Robots;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PS4Controller;
@@ -34,6 +35,10 @@ public class RobotMap {
         
         //Controllers
         controller = new PS4Controller(1);
+
+        intake = new CANSparkMax(1, MotorType.kBrushless);
+        index1 = new CANSparkMax(2, MotorType.kBrushless);
+        index2 = new CANSparkMax(3, MotorType.kBrushless);
 
         //Solenoids
         intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);

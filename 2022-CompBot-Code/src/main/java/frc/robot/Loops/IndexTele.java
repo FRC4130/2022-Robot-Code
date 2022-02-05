@@ -25,6 +25,7 @@ public class IndexTele implements ILoopable {
         intake = RobotMap.intake;
         controller = RobotMap.controller;
         _IntakePosition = Subsystems.intakePosition;
+        _index = Subsystems.index;
     }
 
     public void onStart(){
@@ -34,30 +35,23 @@ public class IndexTele implements ILoopable {
     public void onLoop(){
         if (controller.getCrossButton()){
             _index.runIndex();
-        }
-        else {
-            _index.stopIndex();
-        }
-
-        if(controller.getL1Button()){
-            _index.runIndex();
-
             _IntakePosition.set(_IntakePosition.Sucking);
         }
         else {
-            if (!controller.getCrossButton()){
-                _index.stopIndex();
-            }
             _index.stopIndex();
             _IntakePosition.set(_IntakePosition.Stored);
         }
     }
 
-    public void updateIntakeSolenoid(){
-        //if(indexMove) {
+    /* public void updateIntakeSolenoid(){
+        if(controller.getCircleButton()) {
             _IntakePosition.set(_IntakePosition.Sucking);
         }
+        else {
+            _IntakePosition.set(_IntakePosition.Stored);
+        }
     }
+    */
 
     public boolean isDone(){
         return false;

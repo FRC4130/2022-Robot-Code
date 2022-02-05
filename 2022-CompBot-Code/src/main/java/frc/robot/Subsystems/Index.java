@@ -17,9 +17,9 @@ public class Index {
     }
 
     public void runIndex(){
-        index1.set(0.60);
-        index2.set(0.60);
-        intake.set(0.60);
+        index1.set(0.80);
+        index2.set(0.80);
+        intake.set(0.80);
     }
     
     public void stopIndex(){
