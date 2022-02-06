@@ -16,16 +16,10 @@ public class Index {
         intake = RobotMap.intake;
     }
 
-    public void runIndex(){
-        index1.set(0.80);
-        index2.set(0.80);
-        intake.set(0.80);
-    }
-    
-    public void stopIndex(){
-        index1.set(0);
-        index2.set(0);
-        intake.set(0);   
+    public void indexControl(double pow){
+        index1.set(pow);
+        index2.set(pow);
+        intake.set(pow);
     }
 
     /*public void setNeutralMode(IdleMode nm){

@@ -29,16 +29,16 @@ public class IndexTele implements ILoopable {
     }
 
     public void onStart(){
-        _index.stopIndex();
+        _index.indexControl(0);
     }
 
     public void onLoop(){
         if (controller.getCrossButton()){
-            _index.runIndex();
+            _index.indexControl(0.80);
             _IntakePosition.set(_IntakePosition.Sucking);
         }
         else {
-            _index.stopIndex();
+            _index.indexControl(0);
             _IntakePosition.set(_IntakePosition.Stored);
         }
     }
@@ -58,6 +58,6 @@ public class IndexTele implements ILoopable {
     }
 
     public void onStop(){
-        _index.stopIndex();
+        _index.indexControl(0);
     }
 }
