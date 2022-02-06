@@ -1,3 +1,5 @@
 # FRC4130 2022-Robot-Code
 ## ultrasonic-dev
-Branch for testing of ultrasonic sensors
+!DO NOT MERGE INTO MAIN UNTIL FURTHER NOTICE!<br>
+Branch for testing of ultrasonic sensors.<br>
+Comments have been left in IndexTele.java to explain the example.
