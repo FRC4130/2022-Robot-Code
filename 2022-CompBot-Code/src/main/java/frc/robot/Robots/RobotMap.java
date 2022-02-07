@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 public class RobotMap {
     //DriveTrain Motors
@@ -26,6 +27,9 @@ public class RobotMap {
     //Solenoids
     public static DoubleSolenoid intakeLift;
 
+    //Sensors 
+    public static Ultrasonic sensor;
+
     public static void Init() {
         //DriveTrain Motors
         leftDrive = new TalonFX(1);
@@ -42,6 +46,13 @@ public class RobotMap {
 
         //Solenoids
         intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+
+        //Sensors
+        sensor = new Ultrasonic(1, 2);
     }
-    
+    public static void sensorInit(){
+        //if you get a warning here, idk what it means 
+        //I literally pasted this bit from the docs and the warning wont go away
+        sensor.setAutomaticMode(true);
+    }
 }
