@@ -2,6 +2,7 @@ package frc.robot.Loops;
 
 import com.ctre.phoenix.ILoopable;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.PS4Controller;
 import frc.robot.Robots.RobotMap;
@@ -29,6 +30,7 @@ public class IndexTele implements ILoopable {
     }
 
     public void onStart(){
+        _index.setNeutralMode(IdleMode.kBrake);
         _index.indexControl(0);
     }
 

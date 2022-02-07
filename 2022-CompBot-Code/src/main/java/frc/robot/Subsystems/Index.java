@@ -2,6 +2,7 @@ package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import frc.robot.Robots.RobotMap;
 
@@ -22,10 +23,10 @@ public class Index {
         intake.set(pow);
     }
 
-    /*public void setNeutralMode(IdleMode nm){
+    public void setNeutralMode(IdleMode nm){
         index1.setIdleMode(nm);
         index2.setIdleMode(nm);
-        intake.setIdleMode(nm)
+        intake.setIdleMode(nm);
     }
-    */
+    
 }
