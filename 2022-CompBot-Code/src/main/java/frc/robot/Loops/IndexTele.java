@@ -52,6 +52,7 @@ public class IndexTele implements ILoopable {
         }
         else{
             _index.indexControl(0);
+            _IntakePosition.set(_IntakePosition.Stored);
         }
     }
 
