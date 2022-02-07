@@ -36,10 +36,9 @@ public class IndexTele implements ILoopable {
     }
 
     public void onLoop(){
-        // 12 can be replaced with any number of inches, i didn't know what to put here
         // so for this example the rest of the Index program locks down if a ball is in the index.
         // probably not a good idea in practice but examples are good 
-        if (sensor.getRangeInches() > 12){
+        if (sensor.getRangeInches() > 2){
             if (controller.getCrossButton()){
                 _index.indexControl(0.80);
                 _IntakePosition.set(_IntakePosition.Sucking);
