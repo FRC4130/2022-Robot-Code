@@ -18,6 +18,7 @@ public class IndexTele implements ILoopable {
 
     PS4Controller controller;
     Ultrasonic sensor;
+    Ultrasonic sensor2;
 
     IntakePosition _IntakePosition;
     Index _index;
@@ -28,6 +29,7 @@ public class IndexTele implements ILoopable {
         intake = RobotMap.intake;
         controller = RobotMap.controller;
         sensor = RobotMap.sensor;
+        sensor2 = RobotMap.sensor2;
         _IntakePosition = Subsystems.intakePosition;
         _index = Subsystems.index;
     }
@@ -38,9 +40,8 @@ public class IndexTele implements ILoopable {
     }
 
     public void onLoop(){
-        // so for this example the rest of the Index program locks down if a ball is in the index.
-        // probably not a good idea in practice but examples are good 
-        if (sensor.getRangeInches() > 2){
+        //Index will lockdown if 2 balls are detected
+        if (sensor2.getRangeInches() > 2){
             if (controller.getCrossButton()){
                 _index.indexControl(0.80);
                 _IntakePosition.set(_IntakePosition.Sucking);

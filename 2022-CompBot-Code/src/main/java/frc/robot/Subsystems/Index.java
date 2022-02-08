@@ -1,7 +1,6 @@
 package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -13,12 +12,14 @@ public class Index {
     CANSparkMax intake;
 
     Ultrasonic sensor;
+    Ultrasonic sensor2;
 
     public Index(){
         index1 = RobotMap.index1;
         index2 = RobotMap.index2;
         intake = RobotMap.intake;
         sensor = RobotMap.sensor;
+        sensor2 = RobotMap.sensor2;
     }
 
     public void indexControl(double pow){

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.simulation.UltrasonicSim;
 
 public class RobotMap {
     //DriveTrain Motors
@@ -29,6 +30,7 @@ public class RobotMap {
 
     //Sensors 
     public static Ultrasonic sensor;
+    public static Ultrasonic sensor2;
 
     public static void Init() {
         //DriveTrain Motors
@@ -49,10 +51,10 @@ public class RobotMap {
 
         //Sensors
         sensor = new Ultrasonic(1, 2);
+        sensor2 = new Ultrasonic(1, 2);
     }
     public static void sensorInit(){
-        //if you get a warning here, idk what it means 
-        //I literally pasted this bit from the docs and the warning wont go away
         sensor.setAutomaticMode(true);
+        sensor2.setAutomaticMode(true);
     }
 }
