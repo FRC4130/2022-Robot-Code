@@ -14,7 +14,7 @@ public class Index {
     SparkMaxLimitSwitch sensor;
     SparkMaxLimitSwitch sensor2;
 
-    public Index(){
+    public Index() {
         index1 = RobotMap.index1;
         index2 = RobotMap.index2;
         intake = RobotMap.intake;
@@ -22,16 +22,29 @@ public class Index {
         sensor2 = RobotMap.sensor2;
     }
 
-    public void generalIndexControl(double pow){
+    public void generalIndexControl(double pow) {
         index1.set(pow);
         index2.set(pow);
         intake.set(pow);
     }
 
-    public void setNeutralMode(IdleMode nm){
+    public void setNeutralMode(IdleMode nm) {
         index1.setIdleMode(nm);
         index2.setIdleMode(nm);
         intake.setIdleMode(nm);
     }
-    
+
+    public void runIndex() {
+        // index1 checks
+        if (sensor.isPressed()) {
+            // check if sensor2 sees anything
+            if (sensor2.isPressed()) {
+                generalIndexControl(0);
+            }
+        } else {
+            index1.set(0.80);
+            index2.set(0.80);
+        }
+    }
+
 }

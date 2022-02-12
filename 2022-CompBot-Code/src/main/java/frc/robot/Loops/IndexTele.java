@@ -41,17 +41,7 @@ public class IndexTele implements ILoopable {
 
     public void onLoop() {
         if (controller.getCrossButton()){
-            //index1 checks
-            if (sensor.isPressed()){
-                //check if sensor2 sees anything
-                if (sensor2.isPressed()){
-                    _index.generalIndexControl(0);
-                }
-            }
-            else {
-                index1.set(0.80);
-                index2.set(0.80);
-            }
+            _index.runIndex();
         }
     }
 
