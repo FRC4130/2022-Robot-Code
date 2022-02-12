@@ -24,7 +24,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     RobotMap.Init();
-    RobotMap.sensorInit();
     Subsystems.Init();
     _drive = Subsystems.driveTrain;
     _index = Subsystems.index;

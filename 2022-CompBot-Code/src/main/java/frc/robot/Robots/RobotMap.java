@@ -2,13 +2,12 @@ package frc.robot.Robots;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.simulation.UltrasonicSim;
 
 public class RobotMap {
     //DriveTrain Motors
@@ -29,8 +28,8 @@ public class RobotMap {
     public static DoubleSolenoid intakeLift;
 
     //Sensors 
-    public static Ultrasonic sensor;
-    public static Ultrasonic sensor2;
+    public static SparkMaxLimitSwitch sensor; //lower sensor
+    public static SparkMaxLimitSwitch sensor2; // higher sensor
 
     public static void Init() {
         //DriveTrain Motors
@@ -42,19 +41,15 @@ public class RobotMap {
         //Controllers
         controller = new PS4Controller(1);
 
-        intake = new CANSparkMax(1, MotorType.kBrushless);
-        index1 = new CANSparkMax(2, MotorType.kBrushless);
-        index2 = new CANSparkMax(3, MotorType.kBrushless);
+        intake = new CANSparkMax(2, MotorType.kBrushless);
+        index1 = new CANSparkMax(3, MotorType.kBrushless);
+        index2 = new CANSparkMax(4, MotorType.kBrushless);
 
         //Solenoids
         intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
 
         //Sensors
-        sensor = new Ultrasonic(1, 2);
-        sensor2 = new Ultrasonic(1, 2);
-    }
-    public static void sensorInit(){
-        sensor.setAutomaticMode(true);
-        sensor2.setAutomaticMode(true);
+        sensor = index1.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+        sensor2 = index2.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
     }
 }
