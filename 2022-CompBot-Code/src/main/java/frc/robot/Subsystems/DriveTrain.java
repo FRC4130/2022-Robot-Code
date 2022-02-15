@@ -13,6 +13,8 @@ public class DriveTrain {
     public static TalonFX rightDrive;
     public static TalonFX rightDrive2;
 
+    private final int kTimeoutMs = 10;
+
     public DriveTrain(){
         leftDrive = RobotMap.leftDrive;
         leftDrive2 = RobotMap.leftDrive2;
@@ -36,5 +38,32 @@ public class DriveTrain {
         //NOTE: SmartDashboard cannot use vars outside of the method and cannot be used outside of a method
         SmartDashboard.putNumber("Left Throttle", leftThrottle);
         SmartDashboard.putNumber("Right Throttle", rightThrottle);
+    }
+
+    public void setPos(double nativeUnits){
+        leftDrive.set(ControlMode.MotionMagic, nativeUnits);
+        rightDrive.set(ControlMode.MotionMagic, nativeUnits);
+    }
+
+    public double getLeftPos(){
+        return leftDrive.getSelectedSensorPosition();
+    }
+
+    public double getRightPos(){
+        return rightDrive.getSelectedSensorPosition();
+    }
+
+    public void setMagic(int cruiseVelocity, int acceleration) {
+		
+		leftDrive.configMotionCruiseVelocity(cruiseVelocity, kTimeoutMs);
+		leftDrive.configMotionAcceleration(acceleration, kTimeoutMs);
+		
+		rightDrive.configMotionCruiseVelocity(cruiseVelocity, kTimeoutMs);
+		rightDrive.configMotionAcceleration(acceleration, kTimeoutMs);
+    }
+
+    public void resetSensors(){
+        leftDrive.setSelectedSensorPosition(0);
+        rightDrive.setSelectedSensorPosition(0);
     }
 }

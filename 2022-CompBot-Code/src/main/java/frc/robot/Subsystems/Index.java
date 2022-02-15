@@ -47,4 +47,9 @@ public class Index {
         }
     }
 
+    public void shootIndex(){
+        index1.set(.80);
+        index2.set(.80);
+    }
+
 }
