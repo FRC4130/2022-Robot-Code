@@ -3,6 +3,7 @@ package frc.robot.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robots.RobotMap;
@@ -12,6 +13,8 @@ public class DriveTrain {
     public static TalonFX leftDrive2;
     public static TalonFX rightDrive;
     public static TalonFX rightDrive2;
+
+    public static PigeonIMU pigeon;
 
     private final int kTimeoutMs = 10;
 
@@ -40,10 +43,22 @@ public class DriveTrain {
         SmartDashboard.putNumber("Right Throttle", rightThrottle);
     }
 
+    public void arcade(double throttle, double turn) {
+		
+		RobotMovement(throttle+turn, throttle-turn);
+		
+	}
+
     public void setPos(double nativeUnits){
         leftDrive.set(ControlMode.MotionMagic, nativeUnits);
         rightDrive.set(ControlMode.MotionMagic, nativeUnits);
     }
+
+    public double distanceToRotations(double inches) {
+		
+		return ( ( (2048*25) * inches ) / 92 )*(51.25/17);
+		
+	}
 
     public double getLeftPos(){
         return leftDrive.getSelectedSensorPosition();
@@ -65,5 +80,9 @@ public class DriveTrain {
     public void resetSensors(){
         leftDrive.setSelectedSensorPosition(0);
         rightDrive.setSelectedSensorPosition(0);
+    }
+
+    public double getHeading(){
+        return pigeon.getCompassHeading();
     }
 }
