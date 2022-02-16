@@ -31,7 +31,7 @@ public class RobotMap {
     //Solenoids
     public static DoubleSolenoid intakeLift;
 
-    //Sensors 
+    //Sensors
     public static SparkMaxLimitSwitch sensor; //lower sensor
     public static SparkMaxLimitSwitch sensor2; // higher sensor
 
