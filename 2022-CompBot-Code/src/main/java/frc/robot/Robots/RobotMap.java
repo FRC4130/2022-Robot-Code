@@ -17,6 +17,10 @@ public class RobotMap {
     public static TalonFX rightDrive;
     public static TalonFX rightDrive2;
 
+    //Climb Motors
+    public static TalonFX leftClimb;
+    public static TalonFX rightClimb;
+
     //Index & Intake Neo
     public static CANSparkMax index1;
     public static CANSparkMax index2;
@@ -27,11 +31,12 @@ public class RobotMap {
 
     //Controllers
     public static PS4Controller controller;
+    public static PS4Controller opController;
 
     //Solenoids
     public static DoubleSolenoid intakeLift;
 
-    //Sensors
+    //Sensors 
     public static SparkMaxLimitSwitch sensor; //lower sensor
     public static SparkMaxLimitSwitch sensor2; // higher sensor
 
@@ -41,6 +46,10 @@ public class RobotMap {
         leftDrive2 = new TalonFX(2);
         rightDrive = new TalonFX(3);
         rightDrive2 = new TalonFX(4);
+
+        //Climb Motors
+        leftClimb = new TalonFX(5);
+        rightClimb = new TalonFX(6);
         
         //Controllers
         controller = new PS4Controller(1);
@@ -52,7 +61,7 @@ public class RobotMap {
 
         //Pigeon
         pigeon = new Pigeon2(0);
-
+        
         //Solenoids
         intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
 
