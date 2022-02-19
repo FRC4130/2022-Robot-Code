@@ -47,9 +47,6 @@ public class DriveTrain {
         SmartDashboard.putNumber("Right Throttle", rightThrottle);
     }
 
-<<<<<<< HEAD
-    public void setPOS(int nativeUnits){
-=======
     public void arcade(double throttle, double turn) {
 		
 		RobotMovement(throttle+turn, throttle-turn);
@@ -57,14 +54,10 @@ public class DriveTrain {
 	}
 
     public void setPos(double nativeUnits){
->>>>>>> ca1b29908aa1bf1d9a002a8962852d8edcf1fbac
         leftDrive.set(ControlMode.MotionMagic, nativeUnits);
         rightDrive.set(ControlMode.MotionMagic, nativeUnits);
     }
 
-<<<<<<< HEAD
-    public void resetEncoders(){
-=======
     public double distanceToRotations(double inches) {
 		
 		return ( ( (2048*25) * inches ) / 92 )*(51.25/17);
@@ -89,18 +82,11 @@ public class DriveTrain {
     }
 
     public void resetSensors(){
->>>>>>> ca1b29908aa1bf1d9a002a8962852d8edcf1fbac
         leftDrive.setSelectedSensorPosition(0);
         rightDrive.setSelectedSensorPosition(0);
     }
 
-<<<<<<< HEAD
-    public void stop(){
-        leftDrive.set(ControlMode.PercentOutput, 0);
-        rightDrive.set(ControlMode.PercentOutput, 0);
-=======
     public double getHeading(){
         return pigeon.getCompassHeading();
->>>>>>> ca1b29908aa1bf1d9a002a8962852d8edcf1fbac
     }
 }
