@@ -4,8 +4,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMax.IdleMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robots.RobotMap;
-import frc.robot.Robots.Subsystems;
 
 public class Index {
     CANSparkMax index1;
@@ -15,15 +15,14 @@ public class Index {
     SparkMaxLimitSwitch sensor;
     SparkMaxLimitSwitch sensor2;
 
-    IntakePosition _IntakePosition;
-
     public Index() {
         index1 = RobotMap.index1;
         index2 = RobotMap.index2;
         intake = RobotMap.intake;
         sensor = RobotMap.sensor;
         sensor2 = RobotMap.sensor2;
-        _IntakePosition = Subsystems.intakePosition;
+        index1.setInverted(true);
+        index2.setInverted(true);
     }
 
     public void generalIndexControl(double pow) {
@@ -39,25 +38,27 @@ public class Index {
     }
 
     public void runIndex() {
-        // sensor1 checks
-        if (sensor.isPressed()) {
+        // index1 checks
+        if (!sensor.isPressed()) {
             // check if sensor2 sees anything
             if (sensor2.isPressed()) {
                 generalIndexControl(0);
-                _IntakePosition.set(_IntakePosition.Stored);
             }
-        } 
-        else {
+        } else {
             index1.set(0.80);
             index2.set(0.80);
-            intake.set(0.80);
-            _IntakePosition.set(_IntakePosition.Sucking);
         }
     }
 
     public void shootIndex(){
         index1.set(.80);
         index2.set(.80);
+    }
+
+    public void SmartDashboard(){
+        SmartDashboard.putBoolean("Index 1 Sensor", sensor.isPressed());
+        SmartDashboard.putBoolean("Index 2 Sensor", sensor2.isPressed());
+
     }
 
 }

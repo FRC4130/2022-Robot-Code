@@ -19,7 +19,9 @@ public class RobotMap {
 
     //Climb Motors
     public static TalonFX leftClimb;
+    public static TalonFX leftClimbAdjust;
     public static TalonFX rightClimb;
+    public static TalonFX rightClimbAdjust;
 
     //Index & Intake Neo
     public static CANSparkMax index1;
@@ -50,14 +52,16 @@ public class RobotMap {
         //Climb Motors
         leftClimb = new TalonFX(5);
         rightClimb = new TalonFX(6);
+        leftClimbAdjust = new TalonFX(7);
+        rightClimbAdjust = new TalonFX(8);
         
         //Controllers
         controller = new PS4Controller(1);
 
         //index and intake
-        intake = new CANSparkMax(2, MotorType.kBrushless);
-        index1 = new CANSparkMax(3, MotorType.kBrushless);
-        index2 = new CANSparkMax(4, MotorType.kBrushless);
+        intake = new CANSparkMax(9, MotorType.kBrushless);
+        index1 = new CANSparkMax(10, MotorType.kBrushless);
+        index2 = new CANSparkMax(11, MotorType.kBrushless);
 
         //Pigeon
         pigeon = new Pigeon2(0);

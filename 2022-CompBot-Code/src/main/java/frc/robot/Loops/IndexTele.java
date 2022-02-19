@@ -43,6 +43,10 @@ public class IndexTele implements ILoopable {
         if (controller.getCrossButton()){
             _index.runIndex();
         }
+        else{
+            _index.generalIndexControl(0);
+        }
+        _index.SmartDashboard();
     }
 
     public boolean isDone() {
