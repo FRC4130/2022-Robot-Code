@@ -24,6 +24,16 @@ public class DriveTele implements ILoopable{
 
     public void onLoop(){
         _drive.RobotMovement(_controller.getLeftY(), _controller.getRightY());
+        if (_controller.getPSButton()){
+            _drive.resetEncoders();
+        }
+        if (_controller.getCircleButton()){
+            _drive.setPOS(300000);
+           // _drive.setPOS(-200000);
+        }
+        else {
+            _drive.stop();
+        }
     }
 
     public boolean isDone(){
