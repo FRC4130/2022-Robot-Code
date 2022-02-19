@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMax.IdleMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robots.RobotMap;
 
 public class Index {
@@ -20,6 +21,8 @@ public class Index {
         intake = RobotMap.intake;
         sensor = RobotMap.sensor;
         sensor2 = RobotMap.sensor2;
+        index1.setInverted(true);
+        index2.setInverted(true);
     }
 
     public void generalIndexControl(double pow) {
@@ -36,7 +39,7 @@ public class Index {
 
     public void runIndex() {
         // index1 checks
-        if (sensor.isPressed()) {
+        if (!sensor.isPressed()) {
             // check if sensor2 sees anything
             if (sensor2.isPressed()) {
                 generalIndexControl(0);
@@ -50,6 +53,12 @@ public class Index {
     public void shootIndex(){
         index1.set(.80);
         index2.set(.80);
+    }
+
+    public void SmartDashboard(){
+        SmartDashboard.putBoolean("Index 1 Sensor", sensor.isPressed());
+        SmartDashboard.putBoolean("Index 2 Sensor", sensor2.isPressed());
+
     }
 
 }
