@@ -38,15 +38,16 @@ public class Index {
     }
 
     public void runIndex() {
-        // index1 checks
-        if (!sensor.isPressed()) {
-            // check if sensor2 sees anything
-            if (sensor2.isPressed()) {
-                generalIndexControl(0);
-            }
-        } else {
-            index1.set(0.80);
-            index2.set(0.80);
+        //when index1 has no ball its true
+        //when index2 has no ball its true
+        if (sensor.isPressed()) {
+            generalIndexControl(0.80);
+        }
+        else if (sensor2.isPressed()){
+            generalIndexControl(0.80);
+        } 
+        else {
+            generalIndexControl(0);
         }
     }
 
