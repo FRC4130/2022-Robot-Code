@@ -38,21 +38,25 @@ public class Index {
     }
 
     public void runIndex() {
-        // index1 checks
         if (!sensor.isPressed()) {
-            // check if sensor2 sees anything
-            if (sensor2.isPressed()) {
-                generalIndexControl(0);
+            if (!sensor2.isPressed()){
+                index1.set(0);
+                intake.set(0);
             }
-        } else {
+        }
+        else if (!sensor2.isPressed()){
+            index2.set(0);
             index1.set(0.80);
-            index2.set(0.80);
+            intake.set(0.80);
+        }
+        else {
+            generalIndexControl(0.80);
         }
     }
 
     public void shootIndex(){
-        index1.set(.80);
-        index2.set(.80);
+        index1.set(1);
+        index2.set(1);
     }
 
     public void SmartDashboard(){
