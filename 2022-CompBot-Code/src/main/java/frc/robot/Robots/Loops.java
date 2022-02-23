@@ -13,7 +13,7 @@ import frc.robot.Loops.Shoot;
 public class Loops {
     
     public static void sTeleop(ConcurrentScheduler teleop){
-        //teleop.add(new DriveTele());
+        teleop.add(new DriveTele());
         teleop.add(new IndexTele());
     }
 

@@ -47,6 +47,8 @@ public class IndexTele implements ILoopable {
             _index.generalIndexControl(0);
         }
         _index.SmartDashboard();
+
+        if (controller.getCircleButton()) _index.shootIndex();
     }
 
     public boolean isDone() {
