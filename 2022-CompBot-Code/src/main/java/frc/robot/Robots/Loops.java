@@ -3,6 +3,7 @@ package frc.robot.Robots;
 import com.ctre.phoenix.schedulers.ConcurrentScheduler;
 import com.ctre.phoenix.schedulers.SequentialScheduler;
 
+import frc.robot.Loops.ClimbTele;
 import frc.robot.Loops.DriveDistance;
 import frc.robot.Loops.DriveRotate;
 import frc.robot.Loops.DriveTele;
@@ -15,6 +16,7 @@ public class Loops {
     public static void sTeleop(ConcurrentScheduler teleop){
         teleop.add(new DriveTele());
         teleop.add(new IndexTele());
+        teleop.add(new ClimbTele());
     }
 
     public static void autonRed(SequentialScheduler auton, String target){

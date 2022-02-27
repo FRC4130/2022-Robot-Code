@@ -16,7 +16,7 @@ public class IndexTele implements ILoopable {
     CANSparkMax index2;
     CANSparkMax intake;
 
-    PS4Controller controller;
+    PS4Controller opController;
     SparkMaxLimitSwitch sensor;
     SparkMaxLimitSwitch sensor2;
 
@@ -27,7 +27,7 @@ public class IndexTele implements ILoopable {
         index1 = RobotMap.index1;
         index2 = RobotMap.index2;
         intake = RobotMap.intake;
-        controller = RobotMap.opController;
+        opController = RobotMap.opController;
         sensor = RobotMap.sensor;
         sensor2 = RobotMap.sensor2;
         _IntakePosition = Subsystems.intakePosition;
@@ -40,7 +40,7 @@ public class IndexTele implements ILoopable {
     }
 
     public void onLoop() {
-        if (controller.getCircleButton()){
+        if (opController.getCircleButton()){
             _index.runIndex();
             _IntakePosition.set(_IntakePosition.Sucking);
         }
@@ -50,7 +50,7 @@ public class IndexTele implements ILoopable {
         }
         _index.SmartDashboard();
 
-        if (controller.getCrossButton()){
+        if (opController.getCrossButton()){
             _index.shootIndex();
         }
     }

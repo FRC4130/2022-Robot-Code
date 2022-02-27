@@ -15,7 +15,7 @@ public class ClimbTele implements ILoopable{
 
     public ClimbTele(){
         _operateClimb = Subsystems.climb;
-        _opcontroller = RobotMap.controller;
+        _opcontroller = RobotMap.opController;
     }
 
     public void onStart(){
@@ -24,6 +24,7 @@ public class ClimbTele implements ILoopable{
 
     public void onLoop(){
         _operateClimb.ClimbMovement(_opcontroller.getLeftY(), _opcontroller.getRightY());
+        _operateClimb.ClimbMovement2(_opcontroller.getLeftX(), _opcontroller.getRightX());
     }
 
     public boolean isDone(){
@@ -32,6 +33,7 @@ public class ClimbTele implements ILoopable{
 
     public void onStop(){
         _operateClimb.ClimbMovement(0, 0);
+        _operateClimb.ClimbMovement2(0, 0);
     }
 
 }
