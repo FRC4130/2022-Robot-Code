@@ -15,7 +15,7 @@ public class ClimbTele implements ILoopable{
 
     public ClimbTele(){
         _operateClimb = Subsystems.climb;
-        _opcontroller = RobotMap.opController;
+        _opcontroller = RobotMap.controller;
     }
 
     public void onStart(){

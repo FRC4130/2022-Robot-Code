@@ -44,19 +44,21 @@ public class RobotMap {
 
     public static void Init() {
         //DriveTrain Motors
-        leftDrive = new TalonFX(1);
-        leftDrive2 = new TalonFX(2);
-        rightDrive = new TalonFX(3);
-        rightDrive2 = new TalonFX(4);
+        //Serial for Canivore 30C395F03353385320202034100E03FF
+        leftDrive = new TalonFX(1, "CTR Chain");
+        leftDrive2 = new TalonFX(2, "CTR Chain");
+        rightDrive = new TalonFX(3, "CTR Chain");
+        rightDrive2 = new TalonFX(4, "CTR Chain");
 
         //Climb Motors
-        leftClimb = new TalonFX(5);
-        rightClimb = new TalonFX(6);
-        leftClimbAdjust = new TalonFX(7);
-        rightClimbAdjust = new TalonFX(8);
+        leftClimb = new TalonFX(5, "CTR Chain");
+        rightClimb = new TalonFX(6, "CTR Chain");
+        leftClimbAdjust = new TalonFX(7, "CTR Chain");
+        rightClimbAdjust = new TalonFX(8, "CTR Chain");
         
         //Controllers
-        controller = new PS4Controller(1);
+        controller = new PS4Controller(0);
+        opController = new PS4Controller(1);
 
         //index and intake
         intake = new CANSparkMax(9, MotorType.kBrushless);
@@ -67,7 +69,7 @@ public class RobotMap {
         pigeon = new Pigeon2(0);
         
         //Solenoids
-        intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+        intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
 
         //Sensors
         sensor = index1.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);

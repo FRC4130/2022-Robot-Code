@@ -22,7 +22,7 @@ public class Index {
         sensor = RobotMap.sensor;
         sensor2 = RobotMap.sensor2;
         index1.setInverted(true);
-        index2.setInverted(true);
+        index2.setInverted(false);
     }
 
     public void generalIndexControl(double pow) {
@@ -50,12 +50,12 @@ public class Index {
             intake.set(0.80);
         }
         else {
-            generalIndexControl(0.80);
+            generalIndexControl(1);
         }
     }
 
     public void shootIndex(){
-        index1.set(1);
+        index1.set(.80);
         index2.set(1);
     }
 
