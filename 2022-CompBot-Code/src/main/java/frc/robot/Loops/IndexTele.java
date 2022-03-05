@@ -35,8 +35,9 @@ public class IndexTele implements ILoopable {
     }
 
     public void onStart() {
-        _index.setNeutralMode(IdleMode.kBrake);
+        _index.setNeutralMode(IdleMode.kCoast);
         _index.generalIndexControl(0);
+        _index.shooterControl(0);
     }
 
     public void onLoop() {
@@ -48,11 +49,15 @@ public class IndexTele implements ILoopable {
             _index.generalIndexControl(0);
             _IntakePosition.set(_IntakePosition.Stored);
         }
-        _index.SmartDashboard();
 
         if (opController.getCrossButton()){
             _index.shootIndex();
         }
+        else{
+            _index.shooterControl(0);
+        }
+        
+        _index.SmartDashboard();
     }
 
     public boolean isDone() {

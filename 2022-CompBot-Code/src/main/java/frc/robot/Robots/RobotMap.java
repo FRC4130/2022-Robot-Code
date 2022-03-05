@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -27,6 +28,7 @@ public class RobotMap {
     public static CANSparkMax index1;
     public static CANSparkMax index2;
     public static CANSparkMax intake;
+    public static TalonFX shooter;
 
     //Pigeon
     public static Pigeon2 pigeon;
@@ -39,8 +41,10 @@ public class RobotMap {
     public static DoubleSolenoid intakeLift;
 
     //Sensors 
-    public static SparkMaxLimitSwitch sensor; //lower sensor
-    public static SparkMaxLimitSwitch sensor2; // higher sensor
+    public static SparkMaxLimitSwitch sensor; //lower index sensor
+    public static SparkMaxLimitSwitch sensor2; // higher index sensor
+    public static DigitalInput leftClimbSensor;
+    public static DigitalInput rightClimbSensor; 
 
     public static void Init() {
         //DriveTrain Motors
@@ -64,6 +68,7 @@ public class RobotMap {
         intake = new CANSparkMax(9, MotorType.kBrushless);
         index1 = new CANSparkMax(10, MotorType.kBrushless);
         index2 = new CANSparkMax(11, MotorType.kBrushless);
+        shooter = new TalonFX(12, "CTR Chain");
 
         //Pigeon
         pigeon = new Pigeon2(0);
@@ -74,5 +79,7 @@ public class RobotMap {
         //Sensors
         sensor = index1.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
         sensor2 = index2.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+        leftClimbSensor = new DigitalInput(0);
+        rightClimbSensor = new DigitalInput(0);
     }
 }

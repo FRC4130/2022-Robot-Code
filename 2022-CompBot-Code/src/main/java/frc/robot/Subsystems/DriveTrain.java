@@ -38,9 +38,6 @@ public class DriveTrain {
     public void RobotMovement(double leftThrottle, double rightThrottle){
         leftDrive.set(ControlMode.PercentOutput, leftThrottle * .60);
         rightDrive.set(ControlMode.PercentOutput, rightThrottle*-.60);
-        //NOTE: SmartDashboard cannot use vars outside of the method and cannot be used outside of a method
-        SmartDashboard.putNumber("Left Throttle", leftThrottle);
-        SmartDashboard.putNumber("Right Throttle", rightThrottle);
     }
 
     public void arcade(double throttle, double turn) {
@@ -84,5 +81,15 @@ public class DriveTrain {
 
     public double getHeading(){
         return pigeon.getCompassHeading();
+    }
+
+    public void smartDashboard(){
+        SmartDashboard.putNumber("Left Velocity", leftDrive.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Left Pos", leftDrive.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Left Target Pos", leftDrive.getClosedLoopTarget());
+        
+        SmartDashboard.putNumber("Right Velocity", rightDrive.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Right Pos", rightDrive.getSelectedSensorPosition());
+        SmartDashboard.putNumber("Right Target Pos", rightDrive.getClosedLoopTarget());
     }
 }

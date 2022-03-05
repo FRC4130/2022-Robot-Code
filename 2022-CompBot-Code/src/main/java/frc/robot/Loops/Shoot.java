@@ -5,9 +5,9 @@ import com.ctre.phoenix.ILoopable;
 import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.Index;
 
-public class Shoot implements ILoopable {
+//public class Shoot implements ILoopable {
 	
-	Index _index;
+	/*Index _index;
 	private double durriationMs = 50000;
 	private double endTimeMs = 0;
 	
@@ -43,5 +43,6 @@ public class Shoot implements ILoopable {
 		_index.generalIndexControl(0);
 		System.out.println("[WARNING] Stopped Outaking");
 	}
+	*/
 
-}
+//}

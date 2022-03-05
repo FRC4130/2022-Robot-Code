@@ -23,8 +23,8 @@ public class ClimbTele implements ILoopable{
     }
 
     public void onLoop(){
-        _operateClimb.ClimbMovement(_opcontroller.getLeftY(), _opcontroller.getRightY());
-        _operateClimb.ClimbMovement2(_opcontroller.getLeftX(), _opcontroller.getRightX());
+        _operateClimb.ClimbMovement(_opcontroller.getLeftY() * .70);
+        _operateClimb.ClimbAdjust(_opcontroller.getRightX() * .70);
     }
 
     public boolean isDone(){
@@ -32,8 +32,8 @@ public class ClimbTele implements ILoopable{
     }
 
     public void onStop(){
-        _operateClimb.ClimbMovement(0, 0);
-        _operateClimb.ClimbMovement2(0, 0);
+        _operateClimb.ClimbMovement(0);
+        _operateClimb.ClimbAdjust(0);
     }
 
 }

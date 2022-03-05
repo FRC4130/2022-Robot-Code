@@ -1,52 +1,39 @@
 package frc.robot;
 
 import com.ctre.phoenix.schedulers.ConcurrentScheduler;
-import com.ctre.phoenix.schedulers.SequentialScheduler;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.Robots.Loops;
 import frc.robot.Robots.RobotMap;
 import frc.robot.Robots.Subsystems;
+import frc.robot.Subsystems.DriveTrain;
+import frc.robot.Subsystems.Index;
 
 
 public class Robot extends TimedRobot {
 
   ConcurrentScheduler teleop;
+  DriveTrain _drive;
+  Index _index;
 
-  SequentialScheduler red;
-  SequentialScheduler blue;
-
-  String[] target = {"HZ 1 Ball Long", "HZ 2 Ball", "TA-robot faces wall"};
-  //ArrayList<String> target = new ArrayList<>();
-
-  int targeti = 0;
-
-  int posi = 0;
+  public Robot(){
+      _drive = Subsystems.driveTrain;
+      _index = Subsystems.index;
+  }
   
   @Override
   public void robotInit() {
     RobotMap.Init();
     Subsystems.Init();
-
-
-    //_drive = Subsystems.driveTrain;
-    //_index = Subsystems.index;
+    _drive = Subsystems.driveTrain;
+    _index = Subsystems.index;
   }
 
   @Override
   public void robotPeriodic() {}
 
   @Override
-  public void autonomousInit() {
-
-    red = new SequentialScheduler(0);
-    blue = new SequentialScheduler(0);
-
-    switch (posi) {
-      case 0:
-        Loops.autonRed(red, target[targeti]);
-    }
-  }
+  public void autonomousInit() {}
 
   @Override
   public void autonomousPeriodic() {}

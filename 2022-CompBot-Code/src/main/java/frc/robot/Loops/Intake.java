@@ -5,8 +5,8 @@ import com.ctre.phoenix.ILoopable;
 import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.Index;
 
-public class Intake implements ILoopable {
-	
+//public class Intake implements ILoopable {
+	/*
 	private Index _index;
 	private double durriationMs = 500;
 	private double endTimeMs = 0;
@@ -45,5 +45,6 @@ public class Intake implements ILoopable {
 	public void onStop() {
 		System.out.println("[WARNING] Stopped Intaking");
 	}
+	*/
 
-}
+//}
