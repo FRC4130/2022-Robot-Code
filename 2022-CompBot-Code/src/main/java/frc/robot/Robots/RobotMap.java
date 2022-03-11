@@ -71,7 +71,7 @@ public class RobotMap {
         shooter = new TalonFX(12, "CTR Chain");
 
         //Pigeon
-        pigeon = new Pigeon2(0);
+        pigeon = new Pigeon2(13, "CTR Chain");
         
         //Solenoids
         intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
@@ -79,7 +79,7 @@ public class RobotMap {
         //Sensors
         sensor = index1.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
         sensor2 = index2.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
-        leftClimbSensor = new DigitalInput(0);
+        leftClimbSensor = new DigitalInput(1);
         rightClimbSensor = new DigitalInput(0);
     }
 }

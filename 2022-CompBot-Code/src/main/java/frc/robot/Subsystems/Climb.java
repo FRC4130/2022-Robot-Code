@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robots.RobotMap;
 
@@ -15,6 +16,7 @@ public class Climb {
     TalonFX rightClimb;    
     TalonFX leftClimbAdjust;
     TalonFX rightClimbAdjust;
+    PS4Controller controller;
 
     DigitalInput leftClimbSensor;
     DigitalInput rightClimbSensor;
@@ -29,6 +31,8 @@ public class Climb {
 
         leftClimbSensor = RobotMap.leftClimbSensor;
         rightClimbSensor = RobotMap.rightClimbSensor;
+
+        controller = RobotMap.controller;
 
         leftClimb.set(ControlMode.PercentOutput, 0);
         rightClimb.set(ControlMode.PercentOutput, 0);
@@ -45,17 +49,23 @@ public class Climb {
         rightClimbAdjust.setInverted(InvertType.OpposeMaster);
     }
 
-    public void setNeutralMode(NeutralMode nm){
+    public void setNeutralModeClimb(NeutralMode nm){
         leftClimb.setNeutralMode(nm);
         rightClimb.setNeutralMode(nm);
 
+    }
+
+    public void setNeutralModeAdjust(NeutralMode nm){
         leftClimbAdjust.setNeutralMode(nm);
         rightClimbAdjust.setNeutralMode(nm);
-
     }
 
     public void ClimbMovement(double climberThrottle){
-        if (!leftClimbSensor.get()){
+
+        if(controller.getPSButton()){
+            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
+        }
+        else if (!leftClimbSensor.get()){
             leftClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
         else{
@@ -65,9 +75,13 @@ public class Climb {
         if (!rightClimbSensor.get()){
             rightClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
+        else if(controller.getPSButton()){
+            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
+        }
         else{
             rightClimb.set(ControlMode.PercentOutput, 0);
         }
+
     }
 
     public void ClimbAdjust(double adjustThrottle) {

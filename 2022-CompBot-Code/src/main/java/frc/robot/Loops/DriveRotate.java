@@ -95,7 +95,7 @@ public class DriveRotate implements ILoopable {
 		
 		turnThrottle = turnThrottle > maxThrottle ? maxThrottle : turnThrottle < maxThrottle*-1 ? maxThrottle*-1 : turnThrottle;
 		
-		drive.arcade(0, turnThrottle );
+		drive.arcade(0, turnThrottle  * -1);
 		
 		lastErr = error;
 		

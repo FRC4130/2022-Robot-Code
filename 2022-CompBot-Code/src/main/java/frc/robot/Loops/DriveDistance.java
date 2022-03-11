@@ -12,10 +12,10 @@ public class DriveDistance implements ILoopable {
 	private double distanceNative;
 	private double distanceInches;
 	private DriveTrain _drive;
-	private double acceptableError = 4000; //1000;
+	private double acceptableError = 1000; //1000;
 	
-	private int 	cruiseVelocity	=	2000;
-	private int 	acceleration	=	500;
+	private int 	cruiseVelocity	=	22000;
+	private int 	acceleration	=	2000;
 	
 	public DriveDistance(double inches) {
 		

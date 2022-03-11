@@ -66,9 +66,17 @@ public class Index {
         }
     }
 
-    public void shootIndex(){
-        shooter.set(ControlMode.PercentOutput, 0.85);
-        while(shooter.getMotorOutputPercent() > .82 && controller.getCrossButton()){
+    public void shootHighIndex(){
+        shooter.set(ControlMode.PercentOutput, 0.90);
+        while(shooter.getMotorOutputPercent() > .86 && controller.getTriangleButton()){
+            index1.set(.80);
+            index2.set(.80);
+        }
+    }
+
+    public void shootLowIndex(){
+        shooter.set(ControlMode.PercentOutput, 0.35);
+        while(shooter.getMotorOutputPercent() > .32 && controller.getCrossButton()){
             index1.set(.80);
             index2.set(.80);
         }
@@ -77,6 +85,7 @@ public class Index {
     public void SmartDashboard(){
         SmartDashboard.putBoolean("Index 1 Sensor", sensor.isPressed());
         SmartDashboard.putBoolean("Index 2 Sensor", sensor2.isPressed());
+
     }
 
 }

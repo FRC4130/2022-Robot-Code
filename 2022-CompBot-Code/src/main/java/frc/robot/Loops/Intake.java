@@ -4,15 +4,17 @@ import com.ctre.phoenix.ILoopable;
 
 import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.Index;
+import frc.robot.Subsystems.IntakePosition;
 
-//public class Intake implements ILoopable {
-	/*
+public class Intake implements ILoopable {
 	private Index _index;
-	private double durriationMs = 500;
+	private IntakePosition _position;
+	private double durriationMs = 2000;
 	private double endTimeMs = 0;
 	
 	public Intake() {
 		_index = Subsystems.index;
+		_position = Subsystems.intakePosition;
 	}
 	
 	public Intake(double durriationMS) {
@@ -29,6 +31,7 @@ import frc.robot.Subsystems.Index;
 
 	@Override
 	public void onLoop() {
+		_position.set(_position.Sucking);
 		_index.runIndex();
 	}
 
@@ -36,6 +39,7 @@ import frc.robot.Subsystems.Index;
 	public boolean isDone() {
 		if ( System.currentTimeMillis() >= endTimeMs) {
 			_index.generalIndexControl(0);
+			_position.set(_position.Stored);
 			return true;
 		}
 		return false;
@@ -45,6 +49,5 @@ import frc.robot.Subsystems.Index;
 	public void onStop() {
 		System.out.println("[WARNING] Stopped Intaking");
 	}
-	*/
 
-//}
+}

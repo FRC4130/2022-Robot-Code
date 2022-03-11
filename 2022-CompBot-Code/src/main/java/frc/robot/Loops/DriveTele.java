@@ -12,6 +12,7 @@ public class DriveTele implements ILoopable{
 
     DriveTrain _drive;
     PS4Controller _controller;
+    DriveDistance driveDistance;
 
     public DriveTele(){
         _drive = Subsystems.driveTrain;
@@ -35,7 +36,19 @@ public class DriveTele implements ILoopable{
         else{
             _drive.RobotMovement(_controller.getLeftY()*0.60, _controller.getRightY()*0.60);
         }
-        _drive.smartDashboard();  
+        
+        if(_controller.getTriangleButton()){
+           _drive.setPos(_drive.distanceToRotations(120));
+
+        }
+        if(_controller.getOptionsButton()){
+            _drive.RobotMovement(-.40, -.40);
+        }
+        if(_controller.getPSButton()){
+            _drive.resetSensors();
+        }
+        
+        _drive.smartDashboard();
      }
 
     public boolean isDone(){

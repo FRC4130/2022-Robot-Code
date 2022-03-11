@@ -19,7 +19,8 @@ public class ClimbTele implements ILoopable{
     }
 
     public void onStart(){
-        _operateClimb.setNeutralMode(NeutralMode.Brake);
+        _operateClimb.setNeutralModeClimb(NeutralMode.Brake);
+        _operateClimb.setNeutralModeAdjust(NeutralMode.Coast);
     }
 
     public void onLoop(){
