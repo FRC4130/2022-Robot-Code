@@ -39,8 +39,8 @@ public class Shoot implements ILoopable {
 	@Override
 	public void onLoop() {
 		//_index.shootHighIndex();
-		shooter.set(ControlMode.PercentOutput, 0.90);
-        while(shooter.getMotorOutputPercent() > .86 && System.currentTimeMillis() < endTimeMs) {
+		shooter.set(ControlMode.PercentOutput, 0.83);
+        while(shooter.getMotorOutputPercent() > .81 && System.currentTimeMillis() < endTimeMs) {
             index1.set(.80);
             index2.set(.80);
 		}

@@ -1,6 +1,7 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -47,6 +48,9 @@ public class Climb {
 
         leftClimbAdjust.setInverted(true);
         rightClimbAdjust.setInverted(InvertType.OpposeMaster);
+
+        leftClimb.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5);
+        rightClimb.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5);
     }
 
     public void setNeutralModeClimb(NeutralMode nm){
@@ -62,24 +66,25 @@ public class Climb {
 
     public void ClimbMovement(double climberThrottle){
 
-        if(controller.getPSButton()){
-            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
-        else if (!leftClimbSensor.get()){
+        if (!leftClimbSensor.get()){
             leftClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
         else{
             leftClimb.set(ControlMode.PercentOutput, 0);
+            leftClimb.setSelectedSensorPosition(0);
         }
 
         if (!rightClimbSensor.get()){
             rightClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
-        else if(controller.getPSButton()){
-            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
         else{
             rightClimb.set(ControlMode.PercentOutput, 0);
+            rightClimb.setSelectedSensorPosition(0);
+        }
+
+        if(controller.getPSButton()){
+            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
+            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
 
     }

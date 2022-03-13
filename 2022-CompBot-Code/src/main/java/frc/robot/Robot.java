@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.sql.Driver;
+
 import com.ctre.phoenix.schedulers.ConcurrentScheduler;
 import com.ctre.phoenix.schedulers.SequentialScheduler;
 
@@ -33,11 +35,15 @@ public class Robot extends TimedRobot {
     RobotMap.Init();
     Subsystems.Init();
     CameraServer.startAutomaticCapture();
+    teleop = new ConcurrentScheduler();
+    Loops.sTeleop(teleop);
+    teleop.startAll();
   }
 
   @Override
   public void robotPeriodic() {
     SmartDashboard.putString("Auton", pos[posi]);
+    SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
   }
 
   @Override
@@ -81,7 +87,7 @@ public class Robot extends TimedRobot {
           blue.add(new Intake());
           blue.add(new DriveDistance(-50));
           blue.add(new Shoot());
-          blue.add(new DriveDistance(65));
+          blue.add(new DriveDistance(70));
         break;
       }
       blue.start();
@@ -101,9 +107,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    teleop = new ConcurrentScheduler();
-    Loops.sTeleop(teleop);
-    teleop.startAll();
+    //teleop = new ConcurrentScheduler();
+    //Loops.sTeleop(teleop);
+    //teleop.startAll();
   }
 
   @Override

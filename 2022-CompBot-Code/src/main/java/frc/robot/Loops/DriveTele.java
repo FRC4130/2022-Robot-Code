@@ -37,13 +37,15 @@ public class DriveTele implements ILoopable{
             _drive.RobotMovement(_controller.getLeftY()*0.60, _controller.getRightY()*0.60);
         }
         
+        /* --- Code to Tune in the robot for DriveDistance
         if(_controller.getTriangleButton()){
            _drive.setPos(_drive.distanceToRotations(120));
 
         }
         if(_controller.getOptionsButton()){
             _drive.RobotMovement(-.40, -.40);
-        }
+        
+        }*/
         if(_controller.getPSButton()){
             _drive.resetSensors();
         }
