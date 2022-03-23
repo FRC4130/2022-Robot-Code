@@ -20,9 +20,7 @@ public class RobotMap {
 
     //Climb Motors
     public static TalonFX leftClimb;
-    public static TalonFX leftClimbAdjust;
     public static TalonFX rightClimb;
-    public static TalonFX rightClimbAdjust;
 
     //Index & Intake Neo
     public static CANSparkMax index1;
@@ -39,6 +37,7 @@ public class RobotMap {
 
     //Solenoids
     public static DoubleSolenoid intakeLift;
+    public static DoubleSolenoid climbAdjust;
 
     //Sensors 
     public static SparkMaxLimitSwitch sensor; //lower index sensor
@@ -48,7 +47,6 @@ public class RobotMap {
 
     public static void Init() {
         //DriveTrain Motors
-        //Serial for Canivore 30C395F03353385320202034100E03FF
         leftDrive = new TalonFX(1, "CTR Chain");
         leftDrive2 = new TalonFX(2, "CTR Chain");
         rightDrive = new TalonFX(3, "CTR Chain");
@@ -57,8 +55,6 @@ public class RobotMap {
         //Climb Motors
         leftClimb = new TalonFX(5, "CTR Chain");
         rightClimb = new TalonFX(6, "CTR Chain");
-        leftClimbAdjust = new TalonFX(7, "CTR Chain");
-        rightClimbAdjust = new TalonFX(8, "CTR Chain");
         
         //Controllers
         controller = new PS4Controller(0);
@@ -75,6 +71,7 @@ public class RobotMap {
         
         //Solenoids
         intakeLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
+        climbAdjust = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
 
         //Sensors
         sensor = index1.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);

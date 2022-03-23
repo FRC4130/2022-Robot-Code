@@ -2,7 +2,6 @@ package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -15,8 +14,6 @@ public class Climb {
 
     TalonFX leftClimb;
     TalonFX rightClimb;    
-    TalonFX leftClimbAdjust;
-    TalonFX rightClimbAdjust;
     PS4Controller controller;
 
     DigitalInput leftClimbSensor;
@@ -27,9 +24,6 @@ public class Climb {
         leftClimb = RobotMap.leftClimb;
         rightClimb = RobotMap.rightClimb;
 
-        leftClimbAdjust = RobotMap.leftClimbAdjust;
-        rightClimbAdjust = RobotMap.rightClimbAdjust;
-
         leftClimbSensor = RobotMap.leftClimbSensor;
         rightClimbSensor = RobotMap.rightClimbSensor;
 
@@ -38,16 +32,8 @@ public class Climb {
         leftClimb.set(ControlMode.PercentOutput, 0);
         rightClimb.set(ControlMode.PercentOutput, 0);
 
-        leftClimbAdjust.set(ControlMode.PercentOutput, 0);
-        rightClimbAdjust.set(ControlMode.PercentOutput, 0);
-
-        rightClimbAdjust.follow(leftClimbAdjust);
-
         leftClimb.setInverted(false);
         rightClimb.setInverted(true);
-
-        leftClimbAdjust.setInverted(true);
-        rightClimbAdjust.setInverted(InvertType.OpposeMaster);
 
         leftClimb.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5);
         rightClimb.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5);
@@ -59,38 +45,45 @@ public class Climb {
 
     }
 
-    public void setNeutralModeAdjust(NeutralMode nm){
-        leftClimbAdjust.setNeutralMode(nm);
-        rightClimbAdjust.setNeutralMode(nm);
-    }
-
     public void ClimbMovement(double climberThrottle){
 
-        if (!leftClimbSensor.get()){
+        /*if (!leftClimbSensor.get() && !rightClimbSensor.get()){
             leftClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
-        else{
-            leftClimb.set(ControlMode.PercentOutput, 0);
+        if(leftClimbSensor.get() && !rightClimbSensor.get()){
             leftClimb.setSelectedSensorPosition(0);
+            leftClimb.set(ControlMode.PercentOutput, 0);
         }
+        if (leftClimbSensor.get() && rightClimbSensor.get()){
+            leftClimb.setSelectedSensorPosition(0);
+            leftClimb.set(ControlMode.PercentOutput, 0);
+        }*/
 
-        if (!rightClimbSensor.get()){
-            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
+        if(leftClimb.isRevLimitSwitchClosed() == 0){
+            leftClimb.configPeakOutputReverse(0);
         }
         else{
-            rightClimb.set(ControlMode.PercentOutput, 0);
-            rightClimb.setSelectedSensorPosition(0);
+            leftClimb.configPeakOutputReverse(1);
+        }
+        if(rightClimb.isFwdLimitSwitchClosed() == 0){
+            rightClimb.configPeakOutputForward(0);
+        }
+        else{
+            rightClimb.configPeakOutputForward(1);
         }
 
-        if(controller.getPSButton()){
-            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
+        /*if (!leftClimbSensor.get() && !rightClimbSensor.get()){
             rightClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
+        if(!leftClimbSensor.get() && rightClimbSensor.get()){
+            rightClimb.setSelectedSensorPosition(0);
+            rightClimb.set(ControlMode.PercentOutput, 0);
+        }
+        if (leftClimbSensor.get() && rightClimbSensor.get()){
+            rightClimb.setSelectedSensorPosition(0);
+            rightClimb.set(ControlMode.PercentOutput, 0);
+        }*/
 
-    }
-
-    public void ClimbAdjust(double adjustThrottle) {
-        leftClimbAdjust.set(ControlMode.PercentOutput, adjustThrottle);
     }
 
     public void smartDashboard(){
@@ -99,7 +92,5 @@ public class Climb {
 
         SmartDashboard.putNumber("Climber Right Velocity", rightClimb.getSelectedSensorVelocity());
         SmartDashboard.putBoolean("Climber Right Sensor", rightClimbSensor.get());
-
-        SmartDashboard.putNumber("ClimberAdjust Velocity", leftClimbAdjust.getSelectedSensorVelocity());
     }
 }

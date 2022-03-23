@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.sql.Driver;
-
 import com.ctre.phoenix.schedulers.ConcurrentScheduler;
 import com.ctre.phoenix.schedulers.SequentialScheduler;
 
