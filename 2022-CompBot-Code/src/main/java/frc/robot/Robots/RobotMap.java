@@ -25,8 +25,11 @@ public class RobotMap {
     //Index & Intake Neo
     public static CANSparkMax index1;
     public static CANSparkMax index2;
+    public static CANSparkMax index3;
     public static CANSparkMax intake;
+
     public static TalonFX shooter;
+    public static TalonFX shooter2;
 
     //Pigeon
     public static Pigeon2 pigeon;
@@ -41,7 +44,7 @@ public class RobotMap {
 
     //Sensors 
     public static SparkMaxLimitSwitch sensor; //lower index sensor
-    public static SparkMaxLimitSwitch sensor2; // higher index sensor
+    public static SparkMaxLimitSwitch sensor2; // middle index sensor
     public static DigitalInput leftClimbSensor;
     public static DigitalInput rightClimbSensor; 
 
@@ -55,6 +58,10 @@ public class RobotMap {
         //Climb Motors
         leftClimb = new TalonFX(5, "CTR Chain");
         rightClimb = new TalonFX(6, "CTR Chain");
+
+        //Shooter
+        shooter = new TalonFX(7, "CTR Chain");
+        shooter2 = new TalonFX(8, "CTR Chain");
         
         //Controllers
         controller = new PS4Controller(0);
@@ -64,7 +71,7 @@ public class RobotMap {
         intake = new CANSparkMax(9, MotorType.kBrushless);
         index1 = new CANSparkMax(10, MotorType.kBrushless);
         index2 = new CANSparkMax(11, MotorType.kBrushless);
-        shooter = new TalonFX(12, "CTR Chain");
+        index3 = new CANSparkMax(15, MotorType.kBrushless);
 
         //Pigeon
         pigeon = new Pigeon2(13, "CTR Chain");
@@ -75,7 +82,7 @@ public class RobotMap {
 
         //Sensors
         sensor = index1.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
-        sensor2 = index2.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+        sensor2 = index3.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
         leftClimbSensor = new DigitalInput(1);
         rightClimbSensor = new DigitalInput(0);
     }

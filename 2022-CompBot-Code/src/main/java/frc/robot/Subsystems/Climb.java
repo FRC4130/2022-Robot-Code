@@ -59,17 +59,21 @@ public class Climb {
             leftClimb.set(ControlMode.PercentOutput, 0);
         }*/
 
-        if(leftClimb.isRevLimitSwitchClosed() == 0){
+        if(leftClimb.isFwdLimitSwitchClosed() == 0){
             leftClimb.configPeakOutputReverse(0);
+            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
         else{
             leftClimb.configPeakOutputReverse(1);
+            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
-        if(rightClimb.isFwdLimitSwitchClosed() == 0){
+        if(rightClimb.isRevLimitSwitchClosed() == 0){
             rightClimb.configPeakOutputForward(0);
+            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
         else{
             rightClimb.configPeakOutputForward(1);
+            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
         }
 
         /*if (!leftClimbSensor.get() && !rightClimbSensor.get()){
@@ -88,9 +92,9 @@ public class Climb {
 
     public void smartDashboard(){
         SmartDashboard.putNumber("Climber Left Velocity", leftClimb.getSelectedSensorVelocity());
-        SmartDashboard.putBoolean("Climber Left Sensor", leftClimbSensor.get());
+        SmartDashboard.putNumber("Climber Left Sensor", leftClimb.isFwdLimitSwitchClosed());
 
         SmartDashboard.putNumber("Climber Right Velocity", rightClimb.getSelectedSensorVelocity());
-        SmartDashboard.putBoolean("Climber Right Sensor", rightClimbSensor.get());
+        SmartDashboard.putNumber("Climber Right Sensor", rightClimb.isRevLimitSwitchClosed());
     }
 }

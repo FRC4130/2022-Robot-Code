@@ -1,6 +1,7 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
@@ -13,23 +14,35 @@ import frc.robot.Robots.RobotMap;
 public class Index {
     CANSparkMax index1;
     CANSparkMax index2;
+    CANSparkMax index3;
     CANSparkMax intake;
+
     PS4Controller controller;
     TalonFX shooter;
+    TalonFX shooter2;
 
     SparkMaxLimitSwitch sensor;
     SparkMaxLimitSwitch sensor2;
 
     public Index() {
-        index1 = RobotMap.index1;
         controller = RobotMap.opController;
-        index2 = RobotMap.index2;
         intake = RobotMap.intake;
+        index1 = RobotMap.index1;
+        index2 = RobotMap.index2;
+        index3 = RobotMap.index3;
+
         shooter = RobotMap.shooter;
+        shooter2 = RobotMap.shooter2;
+
         sensor = RobotMap.sensor;
         sensor2 = RobotMap.sensor2;
         index1.setInverted(true);
-        index2.setInverted(false);
+        index2.setInverted(true);
+
+        shooter2.follow(shooter);
+        shooter2.setInverted(InvertType.OpposeMaster);
+
+        //index3.setInverted(false);
     }
 
     public void generalIndexControl(double pow) {
@@ -40,11 +53,13 @@ public class Index {
 
     public void shooterControl(double pow) {
         shooter.set(ControlMode.PercentOutput, pow);
+        index3.set(pow);
     }
 
     public void setNeutralMode(IdleMode nm) {
         index1.setIdleMode(nm);
         index2.setIdleMode(nm);
+        index3.setIdleMode(nm);
         intake.setIdleMode(nm);
     }
 
@@ -68,14 +83,16 @@ public class Index {
 
     public void shootHighIndex(){
         shooter.set(ControlMode.PercentOutput, 0.89);
-        while(shooter.getMotorOutputPercent() > .87 && controller.getTriangleButton()){
-            index1.set(.80);
+        index3.set(.80);
+        while(shooter.getMotorOutputPercent() > .85 && controller.getTriangleButton()){
+            index1.set(.75);
             index2.set(.80);
         }
     }
 
     public void shootLowIndex(){
         shooter.set(ControlMode.PercentOutput, 0.35);
+        index3.set(.80);
         while(shooter.getMotorOutputPercent() > .32 && controller.getCrossButton()){
             index1.set(.80);
             index2.set(.80);
