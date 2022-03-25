@@ -35,6 +35,9 @@ public class Climb {
         leftClimb.setInverted(false);
         rightClimb.setInverted(true);
 
+        leftClimb.setSensorPhase(true);
+        rightClimb.setSensorPhase(true);
+
         leftClimb.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5);
         rightClimb.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 5);
     }
@@ -47,47 +50,14 @@ public class Climb {
 
     public void ClimbMovement(double climberThrottle){
 
-        /*if (!leftClimbSensor.get() && !rightClimbSensor.get()){
-            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
-        if(leftClimbSensor.get() && !rightClimbSensor.get()){
-            leftClimb.setSelectedSensorPosition(0);
-            leftClimb.set(ControlMode.PercentOutput, 0);
-        }
-        if (leftClimbSensor.get() && rightClimbSensor.get()){
-            leftClimb.setSelectedSensorPosition(0);
-            leftClimb.set(ControlMode.PercentOutput, 0);
-        }*/
+        leftClimb.configPeakOutputForward(1);
+        leftClimb.configPeakOutputReverse(-1);
 
-        if(leftClimb.isFwdLimitSwitchClosed() == 0){
-            leftClimb.configPeakOutputReverse(0);
-            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
-        else{
-            leftClimb.configPeakOutputReverse(1);
-            leftClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
-        if(rightClimb.isRevLimitSwitchClosed() == 0){
-            rightClimb.configPeakOutputForward(0);
-            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
-        else{
-            rightClimb.configPeakOutputForward(1);
-            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
+        rightClimb.configPeakOutputForward(1);
+        rightClimb.configPeakOutputReverse(-1);
 
-        /*if (!leftClimbSensor.get() && !rightClimbSensor.get()){
-            rightClimb.set(ControlMode.PercentOutput, climberThrottle);
-        }
-        if(!leftClimbSensor.get() && rightClimbSensor.get()){
-            rightClimb.setSelectedSensorPosition(0);
-            rightClimb.set(ControlMode.PercentOutput, 0);
-        }
-        if (leftClimbSensor.get() && rightClimbSensor.get()){
-            rightClimb.setSelectedSensorPosition(0);
-            rightClimb.set(ControlMode.PercentOutput, 0);
-        }*/
-
+        rightClimb.set(ControlMode.PercentOutput, climberThrottle);
+        leftClimb.set(ControlMode.PercentOutput, climberThrottle);
     }
 
     public void smartDashboard(){
