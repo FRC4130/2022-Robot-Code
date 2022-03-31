@@ -82,11 +82,11 @@ public class Index {
     }
 
     public void shootHighIndex(){
-        shooter.set(ControlMode.PercentOutput, 0.89);
-        index3.set(.80);
-        while(shooter.getMotorOutputPercent() > .85 && controller.getTriangleButton()){
-            index1.set(.75);
-            index2.set(.80);
+        shooter.set(ControlMode.PercentOutput, 0.52);
+        index3.set(.52);
+        while(shooter.getMotorOutputPercent() > .49 && controller.getTriangleButton()){
+            index1.set(.48);
+            index2.set(.50);
         }
     }
 

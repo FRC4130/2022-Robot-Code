@@ -13,20 +13,24 @@ import frc.robot.Subsystems.Index;
 public class Shoot implements ILoopable {
 	
 	Index _index;
-	private double durriationMs = 2000;
+	private double durriationMs = 2500;
 	private double endTimeMs = 0;
+	int selectSpeed;
 
 	TalonFX shooter;
 	PS4Controller _controller;
 	CANSparkMax index1;
 	CANSparkMax index2;
+	CANSparkMax index3;
 	
-	public Shoot() {
+	public Shoot(int selectSpeed) {
 		_index = Subsystems.index;
 		shooter = RobotMap.shooter;
 		_controller = RobotMap.controller;
 		index1 = RobotMap.index1;
 		index2 = RobotMap.index2;
+		index3 = RobotMap.index3;
+		this.selectSpeed = selectSpeed;
 	}
 	
 	@Override
@@ -39,10 +43,29 @@ public class Shoot implements ILoopable {
 	@Override
 	public void onLoop() {
 		//_index.shootHighIndex();
-		shooter.set(ControlMode.PercentOutput, 0.83);
-        while(shooter.getMotorOutputPercent() > .81 && System.currentTimeMillis() < endTimeMs) {
+		/*shooter.set(ControlMode.PercentOutput, 0.85);
+        while(shooter.getMotorOutputPercent() > .82 && System.currentTimeMillis() < endTimeMs) {
             index1.set(.80);
             index2.set(.80);
+		}*/
+		switch(selectSpeed){
+			case 0:
+			shooter.set(ControlMode.PercentOutput, 0.51);
+			index3.set(.51);
+			while(shooter.getMotorOutputPercent() > .47 && System.currentTimeMillis() < endTimeMs){
+				index1.set(.47);
+				index2.set(.51);
+			}
+			break;
+
+			case 1:
+			shooter.set(ControlMode.PercentOutput, 0.51);
+			index3.set(.49);
+			while(shooter.getMotorOutputPercent() > .46 && System.currentTimeMillis() < endTimeMs){
+				index1.set(.48);
+				index2.set(.49);
+			}
+			break;
 		}
 	}
 
@@ -50,6 +73,7 @@ public class Shoot implements ILoopable {
 	public boolean isDone() {
 		if (System.currentTimeMillis() >= endTimeMs) {
 			_index.generalIndexControl(0);
+			shooter.set(ControlMode.PercentOutput, 0);
 			System.out.println("[Info] Finished Outtaking");
 			return true;
 		}

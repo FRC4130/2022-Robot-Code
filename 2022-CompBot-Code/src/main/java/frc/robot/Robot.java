@@ -3,14 +3,14 @@ package frc.robot;
 import com.ctre.phoenix.schedulers.ConcurrentScheduler;
 import com.ctre.phoenix.schedulers.SequentialScheduler;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Loops.DriveAndIntake;
 import frc.robot.Loops.DriveDistance;
+import frc.robot.Loops.DriveRotate;
 import frc.robot.Loops.Shoot;
-import frc.robot.Loops.Intake;
 import frc.robot.Robots.Loops;
 import frc.robot.Robots.RobotMap;
 import frc.robot.Robots.Subsystems;
@@ -24,15 +24,14 @@ public class Robot extends TimedRobot {
   SequentialScheduler blue;
   Alliance side;
 
-  String[] pos = {"HZ 1 Ball Long", "HZ 2 Ball", "TA-Robot Faces Wall"};
+  String[] pos = {"2 Ball", "4 Ball Wall", "4 Ball Straight"};
 
-  int posi = 2;
-  
+  int posi = 0;
+
   @Override
   public void robotInit() {
     RobotMap.Init();
     Subsystems.Init();
-    CameraServer.startAutomaticCapture();
     teleop = new ConcurrentScheduler();
     Loops.sTeleop(teleop);
     teleop.startAll();
@@ -52,41 +51,65 @@ public class Robot extends TimedRobot {
 
     if(side == Alliance.Red){
       switch(posi){
+        //Two Ball Setup
         case 0:
-          Loops.autonRed(red, pos[posi]);
-          SmartDashboard.putString("Working", "Yes");
+          red.add(new DriveAndIntake(48));
+          red.add(new Shoot(0));
+          red.add(new DriveDistance(20));
           break;
+        //Three and Four ball set up wall-facing
         case 1:
-          Loops.autonRed(red, pos[posi]);
-          SmartDashboard.putString("Working", "Yes");
+          red.add(new DriveAndIntake(48));
+          red.add(new Shoot(0));
+          red.add(new DriveRotate(-81));
+          red.add(new DriveAndIntake(215.5, 4250));
+          red.add(new DriveRotate(22));
+          red.add(new DriveDistance(-153));
+          red.add(new Shoot(0));
           break;
+        //Three and Four ball set up facing human player
         case 2:
-          red.add(new Shoot());
-          red.add(new DriveDistance(50));
-          red.add(new Intake());
-          red.add(new DriveDistance(-50));
-          red.add(new Shoot());
-          red.add(new DriveDistance(70));
+          red.add(new DriveAndIntake(58));
+          red.add(new DriveRotate(5));
+          red.add(new Shoot(1));
+          red.add(new DriveRotate(-12));
+          red.add(new DriveAndIntake(150, 4250));
+          red.add(new DriveDistance(-150));
+          red.add(new DriveRotate(10));
+          red.add(new Shoot(1));
           break;
       }
         red.start();
     }
     else{
       switch(posi){
+        //Two Ball Setup
         case 0:
-          Loops.autonBlue(blue, pos[posi]);
+          blue.add(new DriveAndIntake(48));
+          blue.add(new Shoot(0));
+          blue.add(new DriveDistance(20));
           break;
+        //Three and Four ball set up wall-facing
         case 1:
-          Loops.autonBlue(blue, pos[posi]);
+          blue.add(new DriveAndIntake(48));
+          blue.add(new Shoot(0));
+          blue.add(new DriveRotate(-81));
+          blue.add(new DriveAndIntake(215.5, 4250));
+          blue.add(new DriveRotate(22));
+          blue.add(new DriveDistance(-153));
+          blue.add(new Shoot(0));
           break;
+        //Three and Four ball set up facing human player
         case 2:
-          blue.add(new Shoot());
-          blue.add(new DriveDistance(50));
-          blue.add(new Intake());
-          blue.add(new DriveDistance(-50));
-          blue.add(new Shoot());
-          blue.add(new DriveDistance(70));
-        break;
+          blue.add(new DriveAndIntake(58));
+          blue.add(new DriveRotate(5));
+          blue.add(new Shoot(1));
+          blue.add(new DriveRotate(-12));
+          blue.add(new DriveAndIntake(150, 4250));
+          blue.add(new DriveDistance(-150));
+          blue.add(new DriveRotate(10));
+          blue.add(new Shoot(1));
+          break;
       }
       blue.start();
     }

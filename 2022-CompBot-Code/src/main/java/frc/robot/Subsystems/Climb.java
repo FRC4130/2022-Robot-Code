@@ -45,17 +45,9 @@ public class Climb {
     public void setNeutralModeClimb(NeutralMode nm){
         leftClimb.setNeutralMode(nm);
         rightClimb.setNeutralMode(nm);
-
     }
 
     public void ClimbMovement(double climberThrottle){
-
-        leftClimb.configPeakOutputForward(1);
-        leftClimb.configPeakOutputReverse(-1);
-
-        rightClimb.configPeakOutputForward(1);
-        rightClimb.configPeakOutputReverse(-1);
-
         rightClimb.set(ControlMode.PercentOutput, climberThrottle);
         leftClimb.set(ControlMode.PercentOutput, climberThrottle);
     }
@@ -65,6 +57,6 @@ public class Climb {
         SmartDashboard.putNumber("Climber Left Sensor", leftClimb.isFwdLimitSwitchClosed());
 
         SmartDashboard.putNumber("Climber Right Velocity", rightClimb.getSelectedSensorVelocity());
-        SmartDashboard.putNumber("Climber Right Sensor", rightClimb.isRevLimitSwitchClosed());
+        SmartDashboard.putNumber("Climber Right Sensor", rightClimb.isFwdLimitSwitchClosed());
     }
 }

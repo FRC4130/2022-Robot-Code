@@ -57,6 +57,9 @@ public class IndexTele implements ILoopable {
         else if (opController.getCrossButton()){
             _index.shootLowIndex();
         }
+        else if(opController.getSquareButton()){
+            //_index.shootHanger();
+        }
 
         else{
             _index.shooterControl(0);

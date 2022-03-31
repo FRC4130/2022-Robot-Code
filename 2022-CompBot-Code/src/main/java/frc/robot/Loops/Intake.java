@@ -9,7 +9,7 @@ import frc.robot.Subsystems.IntakePosition;
 public class Intake implements ILoopable {
 	private Index _index;
 	private IntakePosition _position;
-	private double durriationMs = 2000;
+	private double durriationMs = 1500;
 	private double endTimeMs = 0;
 	
 	public Intake() {
@@ -17,9 +17,10 @@ public class Intake implements ILoopable {
 		_position = Subsystems.intakePosition;
 	}
 	
-	public Intake(double durriationMS) {
+	public Intake(double durriationMs) {
 		_index = Subsystems.index;
-		durriationMs = durriationMS;
+		_position = Subsystems.intakePosition;
+		this.durriationMs = durriationMs;
 	}
 
 	@Override

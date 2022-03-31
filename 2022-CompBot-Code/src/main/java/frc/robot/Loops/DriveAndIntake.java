@@ -6,9 +6,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robots.Subsystems;
 import frc.robot.Subsystems.DriveTrain;
+import frc.robot.Subsystems.Index;
+import frc.robot.Subsystems.IntakePosition;
 
-public class DriveDistance implements ILoopable {
+public class DriveAndIntake implements ILoopable {
 	
+    //DriveTrain
 	private double distanceNative;
 	private double distanceInches;
 	private DriveTrain _drive;
@@ -16,14 +19,33 @@ public class DriveDistance implements ILoopable {
 	
 	private int 	cruiseVelocity	=	22000;
 	private int 	acceleration	=	12000;
+
+    //Intake
+    private Index _index;
+    private IntakePosition _position;
+    private double durriationMs = 1500;
+    private double endTimeMs = 0;
 	
-	public DriveDistance(double inches) {
+	public DriveAndIntake(double inches, double durriationMs) {
 		
-		System.out.println("Drive Distance task has been created.");
+		System.out.println("Drive and Intake task has been created.");
 		
 		distanceInches = inches;
 		_drive = Subsystems.driveTrain;
 
+        _index = Subsystems.index;
+		_position = Subsystems.intakePosition;
+        this.durriationMs = durriationMs;
+
+	}
+
+	public DriveAndIntake(double inches){
+		
+		distanceInches = inches;
+		_drive = Subsystems.driveTrain;
+
+		_index = Subsystems.index;
+		_position = Subsystems.intakePosition;
 	}
 	
 	@Override
@@ -37,7 +59,8 @@ public class DriveDistance implements ILoopable {
 		if (cruiseVelocity > 0 && acceleration > 0) {
 			_drive.setMagic(cruiseVelocity, acceleration);
 		}
-		
+
+		endTimeMs = System.currentTimeMillis() + durriationMs;
 	}
 
 	@Override
@@ -45,6 +68,8 @@ public class DriveDistance implements ILoopable {
 		
         _drive.setPos(distanceNative);
 		
+        _position.set(_position.Sucking);
+        _index.runIndex();
 	}
 
 	@Override
@@ -59,11 +84,14 @@ public class DriveDistance implements ILoopable {
 		if (leftAtPos && rightAtPos) {
 			System.out.println("[Info] Finished Driving for Distance");
 			System.out.println("[WARNING] The DriveTrain is still in the Motion Magic Control Mode");
-			return true;
-		}
-		
-		return false;
-		
+            if ( System.currentTimeMillis() >= endTimeMs) {
+                _index.generalIndexControl(0);
+                _position.set(_position.Stored);
+                return true;
+            }
+		}	
+
+		return false;		
 	}
 
 	@Override

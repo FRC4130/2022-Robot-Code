@@ -21,6 +21,7 @@ public class DriveTele implements ILoopable{
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tv = table.getEntry("tv");
     NetworkTableEntry tx = table.getEntry("tx");
+    NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry ta = table.getEntry("ta");
 
     double m_LimelightDriveCommand = 0.0;
@@ -36,36 +37,32 @@ public class DriveTele implements ILoopable{
         _drive.setNeutralMode(NeutralMode.Brake);
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
     }
 
     public void onLoop(){
         //Driver Control Input
         //Limelight - read variables tv, tx, ty, ta, ts, tl, tshort, tlong, thor, and tvert
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ts").getDouble(0);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("tl").getDouble(0);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("tshort").getDouble(0);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("tlong").getDouble(0);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("thor").getDouble(0);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("tvert").getDouble(0);
+        //NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
+        SmartDashboard.putNumber("tv", tv.getDouble(0));
+        SmartDashboard.putNumber("tx", tx.getDouble(0));
+        SmartDashboard.putNumber("ty", tx.getDouble(0));
+        SmartDashboard.putNumber("ta", ta.getDouble(0));
 
         //Limelight - Limelight Autonomous Aim/Seek/Range w/ button
         LimelightTracking();
         double steer = -_controller.getRightX();
         double drive = -_controller.getLeftY();
-        boolean auto = _controller.getCrossButton();
         steer *= 1;
         drive *= 1;
-        if (auto) {
-            NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //0
-            NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //3
+        if (_controller.getCrossButton()) {
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1);
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //0
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0); //3
             if (m_LimelightHasValidTarget) {
                 _drive.arcade(m_LimelightDriveCommand, -m_LimelightSteerCommand);
             }
             else {
-                NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //0
-                NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //3
                 _drive.RobotMovement(drive, steer);
             }
         }
@@ -80,23 +77,19 @@ public class DriveTele implements ILoopable{
         }
         //60% Speed, Default
         else{
-            NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //0
-            NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //3
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //1
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0); //1
             _drive.RobotMovement(_controller.getLeftY()*0.60, _controller.getRightY()*0.60);
         }
 
 
         
-        /* --- Code to Tune in the robot for DriveDistance
+        // --- Code to Tune in the robot for DriveDistance
         if(_controller.getTriangleButton()){
-           _drive.setPos(_drive.distanceToRotations(120));
+           _drive.setPos(_drive.distanceToRotations(240));
 
         }
-        if(_controller.getOptionsButton()){
-            _drive.RobotMovement(-.40, -.40);
-        
-        
-        }*/
 
         if(_controller.getPSButton()){
             _drive.resetSensors();
@@ -116,17 +109,13 @@ public class DriveTele implements ILoopable{
     public void LimelightTracking() {
 
         // These numbers must be tuned...
-        final double STEER_K = 0.5; // How hard to turn toward the target
-        final double DRIVE_K = 0.5; // How hard to drive fwd toward the target
-        final double DESIRED_TARGET_AREA = 1.0; // Area of the target when the robot reaches the wall
-        final double MAX_DRIVE = .70; // Speed limit so we don't drive too fast
+        final double STEER_K = 0.025; // How hard to turn toward the target
+        final double DRIVE_K = 0.05; // How hard to drive fwd toward the target
+        final double DESIRED_TARGET_Y = 0; // Area of the target when the robot reaches the wall
+        final double MAX_DRIVE = .30; // Speed limit so we don't drive too fast
         double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-        double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-        SmartDashboard.putNumber("tv", tv);
-        SmartDashboard.putNumber("tx", tx);
-        SmartDashboard.putNumber("ta", ta);
-
+        double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
         // Function to determine autonomous drive and steering settings
         if (tv < 0.5) {
             m_LimelightHasValidTarget = false;
@@ -139,7 +128,7 @@ public class DriveTele implements ILoopable{
         double steer_cmd = tx * STEER_K;
         m_LimelightSteerCommand = steer_cmd;
         // Try to drive forward until the target area reaches our desired area
-        double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
+        double drive_cmd = (DESIRED_TARGET_Y - ty) * DRIVE_K;
         // Don't let the robot drive too fast into the target
         if (drive_cmd > MAX_DRIVE) {
             drive_cmd = MAX_DRIVE;

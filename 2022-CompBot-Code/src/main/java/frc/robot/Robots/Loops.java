@@ -30,7 +30,7 @@ public class Loops {
                 auton.add(new DriveDistance(-240));
                 auton.add(new DriveRotate(-45));
                 auton.add(new DriveDistance(-130));
-                auton.add(new Shoot());
+                auton.add(new Shoot(0));
                 break;
 
             case "HZ 2 Ball":
@@ -55,7 +55,7 @@ public class Loops {
                 auton.add(new DriveDistance(-50));
                 //auton.add(new DriveRotate(45));
                 //auton.add(new DriveDistance(-50));
-                auton.add(new Shoot());
+                auton.add(new Shoot(0));
                 //auton.add(new DriveRotate(45));
                 //auton.add(new DriveDistance(160));
                 //auton.add(new Intake());
