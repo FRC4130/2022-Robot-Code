@@ -82,11 +82,11 @@ public class Index {
     }
 
     public void shootHighIndex(){
-        shooter.set(ControlMode.PercentOutput, 0.52);
-        index3.set(.52);
-        while(shooter.getMotorOutputPercent() > .49 && controller.getTriangleButton()){
-            index1.set(.48);
-            index2.set(.50);
+        shooter.set(ControlMode.PercentOutput, 0.495);
+        index3.set(.47);
+        while(shooter.getMotorOutputPercent() > .465 && controller.getTriangleButton()){
+            index1.set(.43);
+            index2.set(.45);
         }
     }
 
@@ -96,6 +96,15 @@ public class Index {
         while(shooter.getMotorOutputPercent() > .32 && controller.getCrossButton()){
             index1.set(.80);
             index2.set(.80);
+        }
+    }
+
+    public void shootHanger(){
+        shooter.set(ControlMode.PercentOutput, 0.59);
+        index3.set(.55);
+        while(shooter.getMotorOutputPercent() > .55 && controller.getSquareButton()){
+            index1.set(.53);
+            index2.set(.50);
         }
     }
 
