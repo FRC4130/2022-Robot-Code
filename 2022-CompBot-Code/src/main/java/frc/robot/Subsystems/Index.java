@@ -82,19 +82,19 @@ public class Index {
     }
 
     public void shootHighIndex(){
-        shooter.set(ControlMode.PercentOutput, 0.495);
-        index3.set(.47);
-        while(shooter.getMotorOutputPercent() > .465 && controller.getTriangleButton()){
+        shooter.set(ControlMode.PercentOutput, 0.465);
+        index3.set(.40);
+        while(shooter.getMotorOutputPercent() > .435 && controller.getTriangleButton()){
             index1.set(.43);
-            index2.set(.45);
+            index2.set(.40);
         }
     }
 
     public void shootLowIndex(){
-        shooter.set(ControlMode.PercentOutput, 0.35);
+        shooter.set(ControlMode.PercentOutput, 0.22);
         index3.set(.80);
-        while(shooter.getMotorOutputPercent() > .32 && controller.getCrossButton()){
-            index1.set(.80);
+        while(shooter.getMotorOutputPercent() > .18 && controller.getCrossButton()){
+            index1.set(.55);
             index2.set(.80);
         }
     }
@@ -103,7 +103,7 @@ public class Index {
         shooter.set(ControlMode.PercentOutput, 0.59);
         index3.set(.55);
         while(shooter.getMotorOutputPercent() > .55 && controller.getSquareButton()){
-            index1.set(.53);
+            index1.set(.50);
             index2.set(.50);
         }
     }

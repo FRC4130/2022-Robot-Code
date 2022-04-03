@@ -50,20 +50,20 @@ public class Shoot implements ILoopable {
 		}*/
 		switch(selectSpeed){
 			case 0:
-			shooter.set(ControlMode.PercentOutput, 0.51);
-			index3.set(.51);
-			while(shooter.getMotorOutputPercent() > .47 && System.currentTimeMillis() < endTimeMs){
-				index1.set(.47);
-				index2.set(.51);
+			shooter.set(ControlMode.PercentOutput, 0.465);
+			index3.set(.40);
+			while(shooter.getMotorOutputPercent() > .435 && System.currentTimeMillis() < endTimeMs){
+				index1.set(.43);
+				index2.set(.40);
 			}
 			break;
 
 			case 1:
-			shooter.set(ControlMode.PercentOutput, 0.51);
+			shooter.set(ControlMode.PercentOutput, 0.505);
 			index3.set(.49);
 			while(shooter.getMotorOutputPercent() > .46 && System.currentTimeMillis() < endTimeMs){
-				index1.set(.48);
-				index2.set(.49);
+				index1.set(.41);
+				index2.set(.41);
 			}
 			break;
 		}
@@ -73,6 +73,7 @@ public class Shoot implements ILoopable {
 	public boolean isDone() {
 		if (System.currentTimeMillis() >= endTimeMs) {
 			_index.generalIndexControl(0);
+			index3.set(0);
 			shooter.set(ControlMode.PercentOutput, 0);
 			System.out.println("[Info] Finished Outtaking");
 			return true;
