@@ -42,7 +42,7 @@ public class Index {
         shooter2.follow(shooter);
         shooter2.setInverted(InvertType.OpposeMaster);
 
-        //index3.setInverted(false);
+        // index3.setInverted(false);
     }
 
     public void generalIndexControl(double pow) {
@@ -63,52 +63,84 @@ public class Index {
         intake.setIdleMode(nm);
     }
 
+    public void runIntake() {
+        intake.set(.80);
+    }
+
     public void runIndex() {
         if (!sensor.isPressed()) {
-            if (!sensor2.isPressed()){
+            if (!sensor2.isPressed()) {
                 index1.set(0);
                 index2.set(0);
                 intake.set(0);
             }
-        }
-        else if (!sensor2.isPressed()){
+        } else if (!sensor2.isPressed()) {
             index2.set(0);
-            index1.set(0.80);
+            index1.set(0.75);
             intake.set(0.80);
-        }
-        else {
-            generalIndexControl(.80);
+        } else {
+            generalIndexControl(.75);
         }
     }
 
-    public void shootHighIndex(){
-        shooter.set(ControlMode.PercentOutput, 0.465);
+    public void shootHighIndex() {
+        shooter.set(ControlMode.PercentOutput, 0.51); // 49
         index3.set(.40);
-        while(shooter.getMotorOutputPercent() > .435 && controller.getTriangleButton()){
+        while (shooter.getMotorOutputPercent() > .455 && controller.getTriangleButton()) {
             index1.set(.43);
             index2.set(.40);
         }
     }
 
-    public void shootLowIndex(){
+    public void shootHighIndexTest() {
+
+        double endTimeMs = 0;
+        double currentTime = 0;
+
+        shooter.set(ControlMode.PercentOutput, 0.51); // 49
+        index3.set(.40);
+        while (shooter.getMotorOutputPercent() > .455 && controller.getTriangleButton()) {
+            index1.set(.43);
+            index2.set(.40);
+            if(!sensor2.isPressed()){
+                endTimeMs = System.currentTimeMillis() + 1000;
+                while(System.currentTimeMillis() < endTimeMs){
+                    runIndex();
+                }
+                index2.set(.43);
+            }
+        }
+
+    }
+
+    public void shootLowIndex() {
         shooter.set(ControlMode.PercentOutput, 0.22);
         index3.set(.80);
-        while(shooter.getMotorOutputPercent() > .18 && controller.getCrossButton()){
+        while (shooter.getMotorOutputPercent() > .18 && controller.getCrossButton()) {
             index1.set(.55);
             index2.set(.80);
         }
     }
 
-    public void shootHanger(){
-        shooter.set(ControlMode.PercentOutput, 0.59);
+    public void shootHanger() {
+        shooter.set(ControlMode.PercentOutput, 0.57);
         index3.set(.55);
-        while(shooter.getMotorOutputPercent() > .55 && controller.getSquareButton()){
+        while (shooter.getMotorOutputPercent() > .54 && controller.getSquareButton()) {
             index1.set(.50);
             index2.set(.50);
         }
     }
 
-    public void SmartDashboard(){
+    public void shootHangerWall() {
+        shooter.set(ControlMode.PercentOutput, .65);
+        index3.set(.55);
+        while (shooter.getMotorOutputPercent() > .60 && controller.getPSButton()) {
+            index1.set(.50);
+            index2.set(.50);
+        }
+    }
+
+    public void SmartDashboard() {
         SmartDashboard.putBoolean("Index 1 Sensor", sensor.isPressed());
         SmartDashboard.putBoolean("Index 2 Sensor", sensor2.isPressed());
 

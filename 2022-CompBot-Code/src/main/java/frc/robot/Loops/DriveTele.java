@@ -66,6 +66,28 @@ public class DriveTele implements ILoopable{
                 _drive.RobotMovement(drive, steer);
             }
         }
+        else if(_controller.getCircleButton()){
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(2);
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //0
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0); //3
+            if (m_LimelightHasValidTarget) {
+                _drive.arcade(m_LimelightDriveCommand, -m_LimelightSteerCommand);
+            }
+            else {
+                _drive.RobotMovement(drive, steer);
+            }
+        }
+        else if(_controller.getSquareButton()){
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(3);
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //0
+            NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0); //3
+            if (m_LimelightHasValidTarget) {
+                _drive.arcade(m_LimelightDriveCommand, -m_LimelightSteerCommand);
+            }
+            else {
+                _drive.RobotMovement(drive, steer);
+            }
+        }
 
         //20% Speed
         else if (_controller.getL1Button()){

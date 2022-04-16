@@ -50,20 +50,29 @@ public class Shoot implements ILoopable {
 		}*/
 		switch(selectSpeed){
 			case 0:
-			shooter.set(ControlMode.PercentOutput, 0.465);
+			shooter.set(ControlMode.PercentOutput, 0.51);
 			index3.set(.40);
-			while(shooter.getMotorOutputPercent() > .435 && System.currentTimeMillis() < endTimeMs){
+			while(shooter.getMotorOutputPercent() > .455 && System.currentTimeMillis() < endTimeMs){
 				index1.set(.43);
 				index2.set(.40);
 			}
 			break;
 
 			case 1:
-			shooter.set(ControlMode.PercentOutput, 0.505);
-			index3.set(.49);
-			while(shooter.getMotorOutputPercent() > .46 && System.currentTimeMillis() < endTimeMs){
-				index1.set(.41);
-				index2.set(.41);
+			shooter.set(ControlMode.PercentOutput, 0.47);
+			index3.set(.40);
+			while(shooter.getMotorOutputPercent() > .43 && System.currentTimeMillis() < endTimeMs){
+				index1.set(.43);
+				index2.set(.40);
+			}
+			break;
+
+			case 3:
+			shooter.set(ControlMode.PercentOutput, 0.48);
+			index3.set(.40);
+			while(shooter.getMotorOutputPercent() > .44 && System.currentTimeMillis() < endTimeMs){
+				index1.set(.43);
+				index2.set(.40);
 			}
 			break;
 		}

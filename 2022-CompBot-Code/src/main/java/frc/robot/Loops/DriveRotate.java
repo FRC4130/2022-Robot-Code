@@ -16,7 +16,7 @@ public class DriveRotate implements ILoopable {
 	double error;
 	double lastErr;
 	
-	double pGain = 0.0102;
+	double pGain = 0.014; //0.0102
 	double iGain = 0.0011;
 	double dGain = 0.01;
 	

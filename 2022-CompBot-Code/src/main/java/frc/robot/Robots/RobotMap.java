@@ -1,5 +1,6 @@
 package frc.robot.Robots;
 
+import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.revrobotics.CANSparkMax;
@@ -28,6 +29,7 @@ public class RobotMap {
     public static CANSparkMax index3;
     public static CANSparkMax intake;
 
+    //Shooter motors
     public static TalonFX shooter;
     public static TalonFX shooter2;
 
@@ -47,6 +49,9 @@ public class RobotMap {
     public static SparkMaxLimitSwitch sensor2; // middle index sensor
     public static DigitalInput leftClimbSensor;
     public static DigitalInput rightClimbSensor; 
+
+    //CANdle
+    public static CANdle candle;
 
     public static void Init() {
         //DriveTrain Motors
@@ -85,5 +90,7 @@ public class RobotMap {
         sensor2 = index3.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
         leftClimbSensor = new DigitalInput(1);
         rightClimbSensor = new DigitalInput(0);
+
+        candle = new CANdle(0, "CTR Chain");
     }
 }

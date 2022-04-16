@@ -41,24 +41,33 @@ public class IndexTele implements ILoopable {
     }
 
     public void onLoop() {
+        //Intake
         if (opController.getCircleButton()){
             _index.runIndex();
             _IntakePosition.set(_IntakePosition.Sucking);
+        }
+        else if(opController.getL2Button()){
+            _index.runIndex();
         }
         else{
             _index.generalIndexControl(0);
             _IntakePosition.set(_IntakePosition.Stored);
         }
 
+        //Shoot High
         if (opController.getTriangleButton()){
             _index.shootHighIndex();
-        }
-        
+        }  
+        //Shoot Low
         else if (opController.getCrossButton()){
             _index.shootLowIndex();
         }
+        //Shoot Hanger Close
         else if(opController.getSquareButton()){
             _index.shootHanger();
+        }
+        else if(opController.getPSButton()){
+            _index.shootHangerWall();
         }
 
         else{

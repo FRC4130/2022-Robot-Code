@@ -3,11 +3,13 @@ package frc.robot;
 import com.ctre.phoenix.schedulers.ConcurrentScheduler;
 import com.ctre.phoenix.schedulers.SequentialScheduler;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Loops.DriveAndIntake;
+import frc.robot.Loops.DriveAndIntakeWithoutIndex;
 import frc.robot.Loops.DriveDistance;
 import frc.robot.Loops.DriveRotate;
 import frc.robot.Loops.LimelightAuton;
@@ -36,12 +38,15 @@ public class Robot extends TimedRobot {
     teleop = new ConcurrentScheduler();
     Loops.sTeleop(teleop);
     teleop.startAll();
+
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   @Override
   public void robotPeriodic() {
     SmartDashboard.putString("Auton", pos[posi]);
     SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
+
   }
 
   @Override
@@ -55,6 +60,7 @@ public class Robot extends TimedRobot {
         //Two Ball Setup
         case 0:
           red.add(new DriveAndIntake(48));
+          red.add(new LimelightAuton());
           red.add(new Shoot(0));
           red.add(new DriveDistance(20));
           break;
@@ -70,10 +76,11 @@ public class Robot extends TimedRobot {
           break;
         //Three and Four ball set up facing human player
         case 2:
-          red.add(new DriveAndIntake(58));
+          //red.add(new DriveAndIntake(58));
+          red.add(new DriveAndIntakeWithoutIndex(58));
           red.add(new DriveRotate(5));
-          red.add(new Shoot(0));
-          red.add(new DriveRotate(-11.5));
+          red.add(new Shoot(3));
+          red.add(new DriveRotate(-15));
           red.add(new DriveAndIntake(150, 4250));
           red.add(new DriveDistance(-150));
           red.add(new DriveRotate(22));
@@ -91,6 +98,7 @@ public class Robot extends TimedRobot {
         //Two Ball Setup
         case 0:
           blue.add(new DriveAndIntake(48));
+          blue.add(new LimelightAuton());
           blue.add(new Shoot(0));
           blue.add(new DriveDistance(20));
           break;
@@ -108,8 +116,8 @@ public class Robot extends TimedRobot {
         case 2:
           blue.add(new DriveAndIntake(58));
           blue.add(new DriveRotate(5));
-          blue.add(new Shoot(0));
-          blue.add(new DriveRotate(-12));
+          blue.add(new Shoot(3));
+          blue.add(new DriveRotate(-15));
           blue.add(new DriveAndIntake(150, 4250));
           blue.add(new DriveDistance(-150));
           blue.add(new DriveRotate(22));

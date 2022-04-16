@@ -10,6 +10,7 @@ import frc.robot.Loops.DriveStraight;
 import frc.robot.Loops.DriveTele;
 import frc.robot.Loops.IndexTele;
 import frc.robot.Loops.Intake;
+import frc.robot.Loops.LedLoops;
 import frc.robot.Loops.Shoot;
 
 public class Loops {
@@ -18,6 +19,7 @@ public class Loops {
         teleop.add(new DriveTele());
         teleop.add(new IndexTele());
         teleop.add(new ClimbTele());
+        teleop.add(new LedLoops());
         //teleop.add(new DriveStraight());
     }
 

@@ -9,9 +9,9 @@ import frc.robot.Subsystems.DriveTrain;
 import frc.robot.Subsystems.Index;
 import frc.robot.Subsystems.IntakePosition;
 
-public class DriveAndIntake implements ILoopable {
-	
-    //DriveTrain
+public class DriveAndIntakeWithoutIndex implements ILoopable{
+    
+        //DriveTrain
 	private double distanceNative;
 	private double distanceInches;
 	private DriveTrain _drive;
@@ -25,10 +25,9 @@ public class DriveAndIntake implements ILoopable {
     private IntakePosition _position;
     private double durriationMs = 1500;
     private double endTimeMs = 0;
-
-	long downTime;
+	long downTime = 0;
 	
-	public DriveAndIntake(double inches, double durriationMs) {
+	public DriveAndIntakeWithoutIndex(double inches, double durriationMs) {
 		
 		System.out.println("Drive and Intake task has been created.");
 		
@@ -41,7 +40,7 @@ public class DriveAndIntake implements ILoopable {
 
 	}
 
-	public DriveAndIntake(double inches){
+	public DriveAndIntakeWithoutIndex(double inches){
 		
 		distanceInches = inches;
 		_drive = Subsystems.driveTrain;
@@ -76,6 +75,7 @@ public class DriveAndIntake implements ILoopable {
 		if(System.currentTimeMillis() > downTime){
 			_index.runIndex();
 		}
+
 	}
 
 	@Override
@@ -107,5 +107,4 @@ public class DriveAndIntake implements ILoopable {
 		System.out.println("[WARNING] The DriveTrain is still in the Motion Magic Control Mode");
 		
 	}
-
 }
