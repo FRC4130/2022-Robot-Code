@@ -95,16 +95,15 @@ public class Index {
     public void shootHighIndexTest() {
 
         double endTimeMs = 0;
-        double currentTime = 0;
 
-        shooter.set(ControlMode.PercentOutput, 0.51); // 49
+        shooter.set(ControlMode.PercentOutput, 0.5025); // 49
         index3.set(.40);
-        while (shooter.getMotorOutputPercent() > .455 && controller.getTriangleButton()) {
+        while (shooter.getMotorOutputPercent() > .465 && controller.getTriangleButton()) {
             index1.set(.43);
             index2.set(.40);
             if(!sensor2.isPressed()){
-                endTimeMs = System.currentTimeMillis() + 1000;
-                while(System.currentTimeMillis() < endTimeMs){
+                endTimeMs = System.currentTimeMillis() + 2000;
+                while(System.currentTimeMillis() > endTimeMs){
                     runIndex();
                 }
                 index2.set(.43);

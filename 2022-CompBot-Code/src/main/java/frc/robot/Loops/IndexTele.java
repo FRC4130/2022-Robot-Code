@@ -56,7 +56,8 @@ public class IndexTele implements ILoopable {
 
         //Shoot High
         if (opController.getTriangleButton()){
-            _index.shootHighIndex();
+            //_index.shootHighIndex();
+            _index.shootHighIndexTest();
         }  
         //Shoot Low
         else if (opController.getCrossButton()){

@@ -1,12 +1,10 @@
 package frc.robot.Loops;
 
 import com.ctre.phoenix.ILoopable;
-import com.ctre.phoenix.led.CANdle;
 
 import edu.wpi.first.wpilibj.PS4Controller;
 import frc.robot.Robots.RobotMap;
 import frc.robot.Robots.Subsystems;
-import frc.robot.Subsystems.Index;
 import frc.robot.Subsystems.LED;
 
 public class LedLoops implements ILoopable{
